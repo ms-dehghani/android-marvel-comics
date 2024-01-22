@@ -19,6 +19,8 @@ dependencyResolutionManagement {
             version("composeTetManifest", "1.6.0-alpha07")
             version("hilt", "2.48")
             version("material3", "1.1.2")
+            version("core-ktx", "1.12.0")
+            version("appCompat", "1.6.1")
             version("kotlinBom", "1.8.0")
             version("kotlinCoroutines", "1.7.3")
             version("junitKtx", "1.1.5")
@@ -29,7 +31,6 @@ dependencyResolutionManagement {
             version("test-mockk", "1.13.8")
             version("turbine", "1.0.0")
             version("navigation", "2.7.5")
-
 
             library("compose-ui", "androidx.compose.ui", "ui").versionRef("compose")
             library("compose-ui-tooling", "androidx.compose.ui", "ui-tooling").versionRef("compose")
@@ -46,6 +47,10 @@ dependencyResolutionManagement {
             bundle("hilt", listOf("hilt", "hilt-compiler"))
 
             library("material3", "androidx.compose.material3", "material3").versionRef("material3")
+
+            library("core-ktx", "androidx.core", "core-ktx").versionRef("core-ktx")
+
+            library("appcompat", "androidx.appcompat", "appcompat").versionRef("appCompat")
 
             library("junit", "junit", "junit").versionRef("junit")
 
