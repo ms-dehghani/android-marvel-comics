@@ -35,12 +35,4 @@ android {
     }
 }
 
-dependencies {
-
-    implementation(libs.core.ktx)
-    implementation(libs.appcompat)
-    implementation(libs.material3)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.test.junit)
-    androidTestImplementation(libs.test.espresso)
-}
+dependencies {}
