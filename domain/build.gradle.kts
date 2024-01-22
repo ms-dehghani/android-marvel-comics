@@ -1,7 +1,8 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -9,11 +10,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "ir.training.marvelcomics.domain"
         minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -28,15 +25,27 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
+    }
+     buildFeatures {
+        buildConfig = true
     }
 }
 
 dependencies {
     implementation(libs.hilt)
     kapt(libs.hilt.compiler)
+
+    testImplementation(libs.test.mockk)
+
+    implementation(libs.test.junit)
+    testImplementation(libs.junit)
+
+    testImplementation(libs.jupiter)
+    testImplementation(libs.jupiter.engine)
 }
