@@ -82,6 +82,9 @@ dependencies {
     androidTestImplementation(libs.test.espresso)
     androidTestImplementation(libs.test.junit)
     androidTestImplementation(libs.compose.ui.test)
+
+    implementation(project(mapOf("path" to ":domain")))
+
 }
 
 kapt {
