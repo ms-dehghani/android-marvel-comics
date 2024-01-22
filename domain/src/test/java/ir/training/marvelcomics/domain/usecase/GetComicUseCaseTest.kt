@@ -22,7 +22,7 @@ class GetComicUseCaseTest {
         val expectedComic: Comic = mockk()
 
         // When
-        coEvery { mockRepository.getNoteById(comicId) } returns expectedComic
+        coEvery { mockRepository.getComicById(comicId) } returns expectedComic
         val result = getComicUseCase.invoke(comicId)
 
         // Then
@@ -36,7 +36,7 @@ class GetComicUseCaseTest {
             val comicId = 123
 
             // When
-            coEvery { mockRepository.getNoteById(comicId) } returns null
+            coEvery { mockRepository.getComicById(comicId) } returns null
             val result = getComicUseCase.invoke(comicId)
 
             // Then
