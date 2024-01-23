@@ -41,6 +41,9 @@ dependencies {
     implementation(libs.hilt)
     kapt(libs.hilt.compiler)
 
+    implementation(libs.kotlin.coroutines)
+    testImplementation(libs.test.coroutines)
+
     testImplementation(libs.test.mockk)
 
     implementation(libs.test.junit)
