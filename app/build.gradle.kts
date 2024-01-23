@@ -84,6 +84,7 @@ dependencies {
     androidTestImplementation(libs.compose.ui.test)
 
     implementation(project(mapOf("path" to ":domain")))
+    implementation(project(mapOf("path" to ":data")))
 
 }
 
