@@ -11,9 +11,9 @@ import org.junit.Test
 
 class GetComicUseCaseTest {
 
-    val mockRepository = mockk<ComicRepository>()
+    private val mockRepository = mockk<ComicRepository>()
 
-    val getComicUseCase = GetComicUseCase(mockRepository)
+    private val getComicUseCase = GetComicUseCase(mockRepository)
 
     @Test
     fun givenComicIdWhenGetComicUseCaseInvokedThenExpectedComicReturned() = runBlocking {
