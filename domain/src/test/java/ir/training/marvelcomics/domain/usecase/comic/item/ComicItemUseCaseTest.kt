@@ -1,25 +1,25 @@
-package ir.training.marvelcomics.domain.usecase
+package ir.training.marvelcomics.domain.usecase.comic.item
 
 import io.mockk.coEvery
 import io.mockk.mockk
-import ir.training.marvelcomics.domain.model.Comic
-import ir.training.marvelcomics.domain.repository.ComicRepository
+import ir.training.marvelcomics.domain.model.ComicItem
+import ir.training.marvelcomics.domain.repository.comic.item.ComicItemRepository
 import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Test
 
-class GetComicUseCaseTest {
+class ComicItemUseCaseTest {
 
-    private val mockRepository = mockk<ComicRepository>()
+    private val mockRepository = mockk<ComicItemRepository>()
 
-    private val getComicUseCase = GetComicUseCase(mockRepository)
+    private val getComicUseCase = ComicItemUseCase(mockRepository)
 
     @Test
     fun givenComicIdWhenGetComicUseCaseInvokedThenExpectedComicReturned() = runBlocking {
         // Given
         val comicId = 123
-        val expectedComic: Comic = mockk()
+        val expectedComic: ComicItem = mockk()
 
         // When
         coEvery { mockRepository.getComicById(comicId) } returns expectedComic

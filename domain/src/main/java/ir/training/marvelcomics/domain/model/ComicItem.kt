@@ -1,6 +1,6 @@
 package ir.training.marvelcomics.domain.model
 
-data class Comic(
+data class ComicItem(
     val id: Int,
     val title: String,
     val coverUrl: String,

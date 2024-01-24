@@ -48,7 +48,4 @@ dependencies {
 
     implementation(libs.test.junit)
     testImplementation(libs.junit)
-
-    testImplementation(libs.jupiter)
-    testImplementation(libs.jupiter.engine)
 }

@@ -1,19 +1,19 @@
-package ir.training.marvelcomics.domain.usecase.comiclist
+package ir.training.marvelcomics.domain.usecase.comic.list
 
+import io.mockk.coEvery
 import io.mockk.mockk
-import ir.training.marvelcomics.domain.model.Comic
-import org.junit.Test
-import org.junit.jupiter.api.Assertions.assertEquals
-import io.mockk.every
-import ir.training.marvelcomics.domain.repository.comiclist.ComicListRepository
-import kotlinx.coroutines.flow.flow
+import ir.training.marvelcomics.domain.model.ComicItem
+import ir.training.marvelcomics.domain.repository.comic.list.ComicListRepository
 import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
+import org.junit.Test
 
-internal class GetAllComicsTest {
+internal class ComicListUseCaseTest {
 
     private val comicListRepository = mockk<ComicListRepository>()
 
-    private val getAllComics = GetAllComics(comicListRepository)
+    private val comicListUseCase = ComicListUseCase(comicListRepository)
+
 
     @Test
     fun givenPageNumber_WhenGetAllComicUseCaseInvoked_ThenExpectedComicsListReturned() =
@@ -21,7 +21,7 @@ internal class GetAllComicsTest {
 
             val page = 1
             val expectedComicList = listOf(
-                Comic(
+                ComicItem(
                     id = 1,
                     title = "Batman",
                     coverUrl = "url1",
@@ -29,7 +29,7 @@ internal class GetAllComicsTest {
                     writer = "Writer1",
                     penciler = "Penciler1",
                     description = "Description1"
-                ), Comic(
+                ), ComicItem(
                     id = 2,
                     title = "Superman",
                     coverUrl = "url2",
@@ -39,13 +39,11 @@ internal class GetAllComicsTest {
                     description = "Description2"
                 )
             )
-            every { comicListRepository.getAll(page) } returns flow { emit(expectedComicList) }
+            coEvery { comicListRepository.getAll(page) } returns expectedComicList
 
-            val result = getAllComics(page)
+            val result = comicListUseCase.invoke(page)
 
-            result.collect { comics ->
-                assertEquals(expectedComicList, comics)
-            }
+            assertEquals(expectedComicList, result)
         }
 }
 
