@@ -1,7 +1,7 @@
-package ir.training.marvelcomics.domain.repository
+package ir.training.marvelcomics.domain.repository.comicdetail
 
 import ir.training.marvelcomics.domain.model.Comic
 
-interface ComicRepository {
+interface ComicDetailRepository {
     suspend fun getComicById(id: Int): Comic?
 }
