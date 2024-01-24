@@ -14,7 +14,6 @@ import ir.training.marvelcomics.domain.usecase.comiclist.InsertComic
 @Module
 @InstallIn(SingletonComponent::class)
 class ComicListDIModule {
-
     fun provideComicListUseCase(comicListRepository: ComicListRepository) = ComicListUseCase(
         getAllComics = GetAllComics(comicListRepository),
         insertAllComics = InsertAllComics(comicListRepository),
