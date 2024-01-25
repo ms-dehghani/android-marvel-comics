@@ -61,4 +61,3 @@ class ComicListViewModelTest {
         assertEquals(2, viewModel.currentPage.value)
     }
 }
-
