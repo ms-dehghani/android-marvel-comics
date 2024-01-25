@@ -23,8 +23,8 @@ class ComicListViewModel @Inject constructor(private val comicListUseCase: Comic
     private val _state = MutableStateFlow(ComicListState())
     val state: StateFlow<ComicListState> = _state.asStateFlow()
 
-    private val _efectFlow = MutableSharedFlow<ComicListEffect>(1)
-    val efectFlow = _efectFlow.asSharedFlow()
+    private val _effectFlow = MutableSharedFlow<ComicListEffect>(1)
+    val effectFlow = _effectFlow.asSharedFlow()
 
     init {
         viewModelScope.launch {
