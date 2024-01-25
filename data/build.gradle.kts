@@ -47,15 +47,12 @@ android {
             buildConfigField("boolean", "IS_MOCKED", false.toString())
         }
 
-//        create("mock") {
-//            namespace = "ir.training.marvelcomics.data"
-//            dimension = "type"
-//
-//            buildConfigField ("String", "BASE_URL", "\"\"")
-//            buildConfigField ("String", "API_KEY", "\"\"")
-//
-//            buildConfigField("boolean", "IS_MOCKED", true.toString())
-//        }
+        create("mock") {
+            namespace = "ir.training.marvelcomics.data"
+            dimension = "type"
+
+            buildConfigField("boolean", "IS_MOCKED", true.toString())
+        }
     }
 
     buildFeatures {
