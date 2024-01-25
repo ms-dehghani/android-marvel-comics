@@ -51,7 +51,7 @@ class ServiceRepoDIModule {
     @Provides
     @Singleton
     fun provideComicDao(ctx: Context): ComicDao {
-        return ComicDB.getDatabase(ctx).userDao()
+        return ComicDB.getDatabase(ctx).comicDao()
     }
 
     @Provides

@@ -20,6 +20,8 @@ dependencyResolutionManagement {
             version("hilt", "2.48")
             version("material3", "1.1.2")
             version("core-ktx", "1.12.0")
+            version("core-ktx-test", "1.5.0")
+            version("junit-ktx-test", "1.1.5")
             version("appCompat", "1.6.1")
             version("kotlinBom", "1.8.0")
             version("kotlinCoroutines", "1.7.3")
@@ -84,7 +86,12 @@ dependencyResolutionManagement {
             library("test-hilt", "com.google.dagger", "hilt-android-testing").versionRef("hilt")
             library("test-junit", "androidx.test.ext", "junit-ktx").versionRef("junitKtx")
             library("test-navigation", "androidx.navigation", "navigation-testing").versionRef("navigation")
-            bundle("test", listOf("test-hilt", "test-junit" ,"test-navigation", "test-espresso", "test-coroutines", "test-mockk", "test-turbine"))
+            library("test-room", "androidx.room", "room-testing").versionRef("room")
+            library("test-core-ktx", "androidx.test", "core-ktx").versionRef("core-ktx-test")
+            library("test-junit-ktx", "androidx.test.ext", "junit-ktx").versionRef("junit-ktx-test")
+            bundle("test", listOf("test-hilt", "test-junit" ,"test-navigation",
+                "test-espresso", "test-coroutines", "test-mockk", "test-turbine"
+                ,"test-room","test-core-ktx","test-junit-ktx"))
 
         }
     }

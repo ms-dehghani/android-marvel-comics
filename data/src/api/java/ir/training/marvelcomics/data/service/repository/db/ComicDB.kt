@@ -1,10 +1,13 @@
 package ir.training.marvelcomics.data.service.repository.db
 
 import android.content.Context
+import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import ir.training.marvelcomics.data.service.dto.db.comic.ComicDbItem
 import ir.training.marvelcomics.data.service.repository.db.dao.ComicDao
 
+@Database(entities = [ComicDbItem::class], version = 1)
 abstract class ComicDB : RoomDatabase() {
     companion object {
         @Volatile
@@ -23,5 +26,5 @@ abstract class ComicDB : RoomDatabase() {
         }
     }
 
-    abstract fun userDao(): ComicDao
+    abstract fun comicDao(): ComicDao
 }

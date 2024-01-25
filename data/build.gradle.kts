@@ -68,6 +68,7 @@ dependencies {
     implementation(libs.retrofit)
 
     implementation(libs.room.runtime)
+
     kapt(libs.room.compiler)
 
     implementation(libs.kotlin.coroutines)
@@ -87,4 +88,9 @@ dependencies {
     androidTestImplementation(libs.test.espresso)
     androidTestImplementation(libs.test.coroutines)
     androidTestImplementation(libs.test.junit)
+    androidTestImplementation(libs.test.core.ktx)
+    androidTestImplementation(libs.test.junit.ktx)
+    androidTestImplementation(libs.test.room)
+
+
 }
