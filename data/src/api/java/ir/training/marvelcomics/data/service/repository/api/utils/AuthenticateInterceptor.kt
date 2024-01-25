@@ -1,4 +1,4 @@
-package ir.training.marvelcomics.data.service.repo.api.utils
+package ir.training.marvelcomics.data.service.repository.api.utils
 
 import ir.training.marvelcomics.data.BuildConfig
 import okhttp3.HttpUrl

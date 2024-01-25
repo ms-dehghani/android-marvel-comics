@@ -1,7 +1,7 @@
-package ir.training.marvelcomics.data.service.repo
+package ir.training.marvelcomics.data.service.repository
 
-import ir.training.marvelcomics.data.item.repo.ServiceRepository
-import ir.training.marvelcomics.data.service.repo.api.ApiService
+import ir.training.marvelcomics.data.ServiceRepository
+import ir.training.marvelcomics.data.service.repository.api.ApiService
 import ir.training.marvelcomics.data.service.dto.comic.ComicResponseAdapterToComicItem
 import ir.training.marvelcomics.domain.model.ComicItem
 import javax.inject.Inject

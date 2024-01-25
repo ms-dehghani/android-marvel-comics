@@ -1,6 +1,6 @@
 package ir.training.marvelcomics.data.item.dataprovider
 
-import ir.training.marvelcomics.data.item.repo.ServiceRepository
+import ir.training.marvelcomics.data.ServiceRepository
 import ir.training.marvelcomics.domain.model.ComicItem
 import javax.inject.Inject
 

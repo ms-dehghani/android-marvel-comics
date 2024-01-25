@@ -5,8 +5,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ir.training.marvelcomics.data.BuildConfig
-import ir.training.marvelcomics.data.service.repo.api.ApiService
-import ir.training.marvelcomics.data.service.repo.api.utils.AuthenticateInterceptor
+import ir.training.marvelcomics.data.service.repository.api.ApiService
+import ir.training.marvelcomics.data.service.repository.api.utils.AuthenticateInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

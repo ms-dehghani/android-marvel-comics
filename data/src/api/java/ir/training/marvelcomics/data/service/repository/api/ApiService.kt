@@ -1,4 +1,4 @@
-package ir.training.marvelcomics.data.service.repo.api
+package ir.training.marvelcomics.data.service.repository.api
 
 import ir.training.marvelcomics.data.service.dto.base.BaseResponse
 import ir.training.marvelcomics.data.service.dto.comic.ComicResponse
