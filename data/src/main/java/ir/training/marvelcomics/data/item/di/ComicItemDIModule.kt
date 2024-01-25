@@ -6,7 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ir.training.marvelcomics.data.item.dataprovider.ComicItemDataProvider
 import ir.training.marvelcomics.data.item.dataprovider.ComicItemDataProviderImpl
-import ir.training.marvelcomics.data.item.repo.ComicItemRepositoryImpl
+import ir.training.marvelcomics.data.item.repository.ComicItemRepositoryImpl
 import ir.training.marvelcomics.data.ServiceRepository
 import ir.training.marvelcomics.domain.repository.comic.item.ComicItemRepository
 

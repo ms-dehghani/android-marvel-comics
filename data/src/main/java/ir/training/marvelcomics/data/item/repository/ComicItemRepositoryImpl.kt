@@ -1,4 +1,4 @@
-package ir.training.marvelcomics.data.item.repo
+package ir.training.marvelcomics.data.item.repository
 
 import ir.training.marvelcomics.data.item.dataprovider.ComicItemDataProvider
 import ir.training.marvelcomics.domain.model.ComicItem
