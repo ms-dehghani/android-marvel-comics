@@ -1,7 +1,6 @@
 package ir.training.marvelcomic.data.item.repository
 
 import io.mockk.coEvery
-import io.mockk.every
 import io.mockk.mockk
 import ir.training.marvelcomics.data.item.dataprovider.ComicItemDataProvider
 import ir.training.marvelcomics.data.item.repository.ComicItemRepositoryImpl
@@ -13,7 +12,7 @@ import org.junit.Test
 class ComicItemRepositoryImplTest {
 
     @Test
-    fun getComicByIdTest() = runBlocking {
+    fun givenComicID_WhenGetComicByIdInvoked_ThenExpectedComicsItemReturned() = runBlocking {
         // Given
         val mockDataProvider = mockk<ComicItemDataProvider>()
         val comicItemRepository = ComicItemRepositoryImpl(mockDataProvider)
@@ -29,4 +28,20 @@ class ComicItemRepositoryImplTest {
         // Then
         assertEquals(expectedComicItem, actualComicItem)
     }
+
+    @Test
+    fun givenComicID_WhenGetComicByIdInvoked_ThenNullReturned() = runBlocking {
+        // Given
+        val mockDataProvider = mockk<ComicItemDataProvider>()
+        val comicItemRepository = ComicItemRepositoryImpl(mockDataProvider)
+        val expectedComicItem = null
+        coEvery { mockDataProvider.getComicItemByID(any()) } returns expectedComicItem
+
+        // When
+        val actualComicItem = comicItemRepository.getComicById(1)
+
+        // Then
+        assertEquals(actualComicItem, null)
+    }
+
 }
