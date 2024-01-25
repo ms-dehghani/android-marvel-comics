@@ -6,6 +6,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ir.training.marvelcomics.data.BuildConfig
+import ir.training.marvelcomics.data.ServiceRepository
+import ir.training.marvelcomics.data.service.repository.ServiceRepositoryImpl
 import ir.training.marvelcomics.data.service.repository.api.ApiService
 import ir.training.marvelcomics.data.service.repository.api.utils.AuthenticateInterceptor
 import ir.training.marvelcomics.data.service.repository.db.ComicDB
@@ -50,6 +52,12 @@ class ServiceRepoDIModule {
     @Singleton
     fun provideComicDao(ctx: Context): ComicDao {
         return ComicDB.getDatabase(ctx).userDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideServiceRepository(apiService: ApiService, comicDao: ComicDao): ServiceRepository {
+        return ServiceRepositoryImpl(apiService, comicDao)
     }
 
 
