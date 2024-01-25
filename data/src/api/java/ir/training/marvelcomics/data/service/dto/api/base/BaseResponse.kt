@@ -1,4 +1,4 @@
-package ir.training.marvelcomics.data.service.dto.base
+package ir.training.marvelcomics.data.service.dto.api.base
 
 class BaseResponse<T>(
     val attributionHTML: String,

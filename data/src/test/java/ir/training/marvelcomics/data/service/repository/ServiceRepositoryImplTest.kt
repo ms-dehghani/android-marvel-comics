@@ -1,17 +1,20 @@
-package ir.training.marvelcomic.data.service
+package ir.training.marvelcomics.data.service.repository
 
+import app.cash.turbine.test
 import io.mockk.coEvery
 import io.mockk.mockk
-import ir.training.marvelcomics.data.service.dto.base.BaseResponse
-import ir.training.marvelcomics.data.service.dto.base.DataResponse
-import ir.training.marvelcomics.data.service.repository.ServiceRepositoryImpl
+import ir.training.marvelcomics.data.service.dto.api.base.BaseResponse
+import ir.training.marvelcomics.data.service.dto.api.base.DataResponse
+import ir.training.marvelcomics.data.service.dto.api.comic.ComicResponse
+import ir.training.marvelcomics.data.service.dto.api.thumbnail.ThumbnailResponse
 import ir.training.marvelcomics.data.service.repository.api.ApiService
-import ir.training.marvelcomics.data.service.dto.comic.ComicResponse
-import ir.training.marvelcomics.data.service.dto.thumbnail.ThumbnailResponse
+import ir.training.marvelcomics.data.service.repository.db.dao.ComicDao
 import ir.training.marvelcomics.domain.model.ComicItem
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Test
+
 
 class ServiceRepositoryImplTest {
 
@@ -19,7 +22,9 @@ class ServiceRepositoryImplTest {
     fun givenComicID_WhenGetComicByIdInvoked_ThenExpectedComicsItemReturned() = runBlocking {
         // Given
         val mockApiService = mockk<ApiService>()
-        val serviceRepository = ServiceRepositoryImpl(mockApiService)
+        val mockDBService = mockk<ComicDao>()
+        val serviceRepository = ServiceRepositoryImpl(mockApiService, mockDBService)
+
         val expectedComicItem = ComicItem(
             id = 1, title = "title", coverUrl = "imageUrl.", publishedDate = "", writer = "",
             penciler = "", description = "description"
@@ -41,13 +46,18 @@ class ServiceRepositoryImplTest {
             status = "Ok",
         )
 
+        coEvery { mockDBService.getComicById(any()) } returns null
+        coEvery { mockDBService.insert(any()) } returns Unit
         coEvery { mockApiService.getComicById(any()) } returns baseResponse
 
         // When
-        val actualComicItem = serviceRepository.getComicById(1)
-
-        // Then
-        assertEquals(expectedComicItem, actualComicItem)
+        val mutableStateFlow = MutableStateFlow<ComicItem?>(null)
+        mutableStateFlow.test {
+            assertEquals(null, awaitItem())
+            serviceRepository.getComicById(1, mutableStateFlow)
+            assertEquals(expectedComicItem, awaitItem())
+            assertEquals(cancelAndConsumeRemainingEvents().size, 0)
+        }
     }
 
 
@@ -55,7 +65,8 @@ class ServiceRepositoryImplTest {
     fun givenComicID_WhenGetComicByIdInvoked_ThenNullReturned() = runBlocking {
         // Given
         val mockApiService = mockk<ApiService>()
-        val serviceRepository = ServiceRepositoryImpl(mockApiService)
+        val mockDBService = mockk<ComicDao>()
+        val serviceRepository = ServiceRepositoryImpl(mockApiService, mockDBService)
 
         val baseResponse = BaseResponse<ComicResponse?>(
             attributionHTML = "",
@@ -66,12 +77,15 @@ class ServiceRepositoryImplTest {
             status = "Ok",
         )
 
+        coEvery { mockDBService.getComicById(any()) } returns null
         coEvery { mockApiService.getComicById(any()) } returns baseResponse
 
         // When
-        val actualComicItem = serviceRepository.getComicById(1)
-
-        // Then
-        assertEquals(actualComicItem, null)
+        val mutableStateFlow = MutableStateFlow<ComicItem?>(null)
+        mutableStateFlow.test {
+            assertEquals(null, awaitItem())
+            serviceRepository.getComicById(1, mutableStateFlow)
+            assertEquals(cancelAndConsumeRemainingEvents().size, 0)
+        }
     }
 }

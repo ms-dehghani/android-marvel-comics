@@ -1,4 +1,4 @@
-package ir.training.marvelcomics.data.service.dto.comic
+package ir.training.marvelcomics.data.service.dto.api.comic
 
 import ir.training.marvelcomics.domain.model.ComicItem
 

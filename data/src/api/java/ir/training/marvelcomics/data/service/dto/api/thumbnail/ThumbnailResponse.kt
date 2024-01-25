@@ -1,4 +1,4 @@
-package ir.training.marvelcomics.data.service.dto.thumbnail
+package ir.training.marvelcomics.data.service.dto.api.thumbnail
 
 data class ThumbnailResponse(
     val extension: String,

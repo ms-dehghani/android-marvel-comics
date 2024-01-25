@@ -1,5 +1,6 @@
 package ir.training.marvelcomics.data.service.di
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -7,6 +8,8 @@ import dagger.hilt.components.SingletonComponent
 import ir.training.marvelcomics.data.BuildConfig
 import ir.training.marvelcomics.data.service.repository.api.ApiService
 import ir.training.marvelcomics.data.service.repository.api.utils.AuthenticateInterceptor
+import ir.training.marvelcomics.data.service.repository.db.ComicDB
+import ir.training.marvelcomics.data.service.repository.db.dao.ComicDao
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -41,6 +44,12 @@ class ServiceRepoDIModule {
     @Singleton
     fun provideMarvelApi(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideComicDao(ctx: Context): ComicDao {
+        return ComicDB.getDatabase(ctx).userDao()
     }
 
 

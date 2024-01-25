@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "ir.training.marvelcomic.data"
+    namespace = "ir.training.marvelcomics.data"
     compileSdk = 34
 
     defaultConfig {
@@ -70,6 +70,9 @@ dependencies {
     implementation(libs.retrofit.gson)
     implementation(libs.retrofit)
 
+    implementation(libs.room.runtime)
+    kapt(libs.room.compiler)
+
     implementation(libs.kotlin.coroutines)
 
     implementation(libs.compose.activity)
@@ -81,6 +84,8 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.test.coroutines)
+
+    testImplementation(libs.test.turbine)
 
     androidTestImplementation(libs.test.espresso)
     androidTestImplementation(libs.test.coroutines)

@@ -33,6 +33,7 @@ dependencyResolutionManagement {
             version("navigation", "2.7.5")
             version("retrofit", "2.9.0")
             version("gson", "2.10.1")
+            version("room", "2.6.1")
 
             library("compose-ui", "androidx.compose.ui", "ui").versionRef("compose")
             library("compose-ui-tooling", "androidx.compose.ui", "ui-tooling").versionRef("compose")
@@ -65,6 +66,11 @@ dependencyResolutionManagement {
             bundle("kotlin", listOf("kotlin-bom", "kotlin-coroutines"))
 
             library("navigation", "androidx.navigation", "navigation-compose").versionRef("navigation")
+
+            library("room-runtime", "androidx.room", "room-runtime").versionRef("room")
+            library("room-compiler", "androidx.room", "room-compiler").versionRef("room")
+            bundle("room", listOf("room-runtime", "room-compiler"))
+
 
             library("jupiter", "org.junit.jupiter", "junit-jupiter-api").versionRef("jupiter")
             library("jupiter-engine", "org.junit.jupiter", "junit-jupiter-engine").versionRef("jupiter")

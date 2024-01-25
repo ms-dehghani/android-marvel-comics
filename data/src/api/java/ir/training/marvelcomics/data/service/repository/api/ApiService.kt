@@ -1,7 +1,7 @@
 package ir.training.marvelcomics.data.service.repository.api
 
-import ir.training.marvelcomics.data.service.dto.base.BaseResponse
-import ir.training.marvelcomics.data.service.dto.comic.ComicResponse
+import ir.training.marvelcomics.data.service.dto.api.base.BaseResponse
+import ir.training.marvelcomics.data.service.dto.api.comic.ComicResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 
