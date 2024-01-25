@@ -31,6 +31,8 @@ dependencyResolutionManagement {
             version("test-mockk", "1.13.8")
             version("turbine", "1.0.0")
             version("navigation", "2.7.5")
+            version("retrofit", "2.9.0")
+            version("gson", "2.10.1")
 
             library("compose-ui", "androidx.compose.ui", "ui").versionRef("compose")
             library("compose-ui-tooling", "androidx.compose.ui", "ui-tooling").versionRef("compose")
@@ -45,6 +47,10 @@ dependencyResolutionManagement {
             library("hilt", "com.google.dagger", "hilt-android").versionRef("hilt")
             library("hilt-compiler", "com.google.dagger", "hilt-android-compiler").versionRef("hilt")
             bundle("hilt", listOf("hilt", "hilt-compiler"))
+
+            library("retrofit", "com.squareup.retrofit2", "retrofit").versionRef("retrofit")
+            library("retrofit-gson", "com.squareup.retrofit2", "converter-gson").versionRef("retrofit")
+            bundle("retrofit", listOf("retrofit", "retrofit-gson"))
 
             library("material3", "androidx.compose.material3", "material3").versionRef("material3")
 
