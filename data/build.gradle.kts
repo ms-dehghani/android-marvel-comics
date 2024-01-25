@@ -77,6 +77,8 @@ dependencies {
     implementation(libs.hilt)
     kapt(libs.hilt.compiler)
 
+    testImplementation(libs.test.mockk)
+
     testImplementation(libs.junit)
     testImplementation(libs.test.coroutines)
 
