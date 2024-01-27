@@ -103,4 +103,89 @@ class ServiceRepositoryImplTest {
             assertEquals(cancelAndConsumeRemainingEvents().size, 0)
         }
     }
+
+    @Test
+    fun givenLimitAndOffset_WhenGetComicListInvoked_ThenExpectedComicListReturned() = runBlocking {
+        // Given
+        val mockApiService = mockk<ApiService>()
+        val mockDBService = mockk<ComicDao>()
+        val mockDB = mockk<ComicDB>()
+        val serviceRepository = ServiceRepositoryImpl(mockApiService, mockDB)
+
+        val expectedComicList = listOf(
+            ComicItem(
+                id = 1,
+                title = "title1",
+                coverUrlPath = "imageUrl1",
+                coverUrlExtension = "",
+                publishedDate = "",
+                writer = "",
+                penciler = "",
+                description = "description1"
+            ),
+            ComicItem(
+                id = 2,
+                title = "title2",
+                coverUrlPath = "imageUrl2",
+                coverUrlExtension = "",
+                publishedDate = "",
+                writer = "",
+                penciler = "",
+                description = "description2"
+            )
+        )
+
+        val mutableStateFlow = MutableStateFlow<List<ComicItem>>(emptyList())
+
+        val comicResponse1 = ComicResponse(
+            id = 1, title = "title1", description = "description1",
+            thumbnail = ThumbnailResponse(
+                extension = "",
+                path = "imageUrl1"
+            )
+        )
+        val comicResponse2 = ComicResponse(
+            id = 2, title = "title2", description = "description2",
+            thumbnail = ThumbnailResponse(
+                extension = "",
+                path = "imageUrl2"
+            )
+        )
+
+
+        every { mockDB.comicDao() } returns mockDBService
+
+        coEvery { mockDBService.insertAll(any()) } returns Unit
+
+        coEvery {
+            mockDBService.getComicList(
+                any(),
+                any()
+            )
+        } returns emptyList()
+
+        coEvery {
+            mockApiService.getComicList(
+                any(),
+                any()
+            )
+        } coAnswers {
+            BaseResponse(
+                attributionHTML = "",
+                attributionText = "",
+                code = 200,
+                copyright = "OK",
+                data = DataResponse(1, 1, 1, listOf(comicResponse1, comicResponse2), 1),
+                status = "Ok",
+            )
+        }
+
+        // Then
+        mutableStateFlow.test {
+            assertEquals(emptyList<ComicItem>(), awaitItem())
+            serviceRepository.getComicList(10, 0, mutableStateFlow)
+            assertEquals(expectedComicList, awaitItem())
+        }
+    }
+
 }

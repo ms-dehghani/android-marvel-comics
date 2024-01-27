@@ -5,7 +5,7 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import ir.training.marvelcomics.data.service.dto.db.comic.item.ComicDbItem
+import ir.training.marvelcomics.data.service.dto.db.comic.ComicDbItem
 import ir.training.marvelcomics.data.service.repository.db.ComicDB
 import ir.training.marvelcomics.data.service.repository.db.dao.ComicDao
 import kotlinx.coroutines.runBlocking
@@ -41,7 +41,8 @@ class ComicDaoTest {
         val expectedComicItem = ComicDbItem(
             id = comicId,
             title = "title",
-            coverUrl = "coverUrl",
+            coverUrlPath = "coverUrlPath",
+            coverUrlExtension = "coverUrlExtension",
             description = ""
         )
         comicDao.insert(expectedComicItem)
@@ -54,7 +55,8 @@ class ComicDaoTest {
         assertEquals(expectedComicItem.id, actualComicItem!!.id)
         assertEquals(expectedComicItem.title, actualComicItem.title)
         assertEquals(expectedComicItem.description, actualComicItem.description)
-        assertEquals(expectedComicItem.coverUrl, actualComicItem.coverUrl)
+        assertEquals(expectedComicItem.coverUrlPath, actualComicItem.coverUrlPath)
+        assertEquals(expectedComicItem.coverUrlExtension, actualComicItem.coverUrlExtension)
     }
 
     @Test
@@ -64,20 +66,22 @@ class ComicDaoTest {
             ComicDbItem(
                 id = 1,
                 title = "title1",
-                coverUrl = "coverUrl1",
+                coverUrlPath = "coverUrlPath",
+                coverUrlExtension = "coverUrlExtension",
                 description = "description1"
             ),
             ComicDbItem(
                 id = 2,
                 title = "title2",
-                coverUrl = "coverUrl2",
+                coverUrlPath = "coverUrlPath2",
+                coverUrlExtension = "coverUrlExtension2",
                 description = "description2"
             )
         )
         comicDao.insertAll(comicList)
 
         // When
-        val actualComicList = comicDao.getAll(2, 0)
+        val actualComicList = comicDao.getComicList(2, 0)
 
         // Then
         assertFalse(actualComicList.isEmpty())
@@ -86,7 +90,8 @@ class ComicDaoTest {
             assertEquals(comicList[i].id, actualComicList[i].id)
             assertEquals(comicList[i].title, actualComicList[i].title)
             assertEquals(comicList[i].description, actualComicList[i].description)
-            assertEquals(comicList[i].coverUrl, actualComicList[i].coverUrl)
+            assertEquals(comicList[i].coverUrlPath, actualComicList[i].coverUrlPath)
+            assertEquals(comicList[i].coverUrlExtension, actualComicList[i].coverUrlExtension)
         }
     }
 
@@ -96,7 +101,8 @@ class ComicDaoTest {
         val comicItem = ComicDbItem(
             id = 1,
             title = "title",
-            coverUrl = "coverUrl",
+            coverUrlPath = "coverUrlPath",
+            coverUrlExtension = "coverUrlExtension",
             description = "description"
         )
         comicDao.insert(comicItem)
@@ -116,20 +122,22 @@ fun testInsertAll() = runBlocking {
         ComicDbItem(
             id = 1,
             title = "title1",
-            coverUrl = "coverUrl1",
+            coverUrlPath = "coverUrlPath",
+            coverUrlExtension = "coverUrlExtension",
             description = "description1"
         ),
         ComicDbItem(
             id = 2,
             title = "title2",
-            coverUrl = "coverUrl2",
+            coverUrlPath = "coverUrlPath2",
+            coverUrlExtension = "coverUrlExtension2",
             description = "description2"
         )
     )
 
     // When
     comicDao.insertAll(comicList)
-    val actualComicList = comicDao.getAll(2, 0)
+    val actualComicList = comicDao.getComicList(2, 0)
 
     // Then
     assertFalse(actualComicList.isEmpty())
@@ -138,7 +146,8 @@ fun testInsertAll() = runBlocking {
         assertEquals(comicList[i].id, actualComicList[i].id)
         assertEquals(comicList[i].title, actualComicList[i].title)
         assertEquals(comicList[i].description, actualComicList[i].description)
-        assertEquals(comicList[i].coverUrl, actualComicList[i].coverUrl)
+        assertEquals(comicList[i].coverUrlPath, actualComicList[i].coverUrlPath)
+        assertEquals(comicList[i].coverUrlExtension, actualComicList[i].coverUrlExtension)
     }
 }
 

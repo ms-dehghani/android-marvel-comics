@@ -1,9 +1,9 @@
-package ir.training.marvelcomics.data.item.repository
+package ir.training.marvelcomics.data.comic.item.repository
 
 import app.cash.turbine.test
 import io.mockk.coEvery
 import io.mockk.mockk
-import ir.training.marvelcomics.data.item.dataprovider.ComicItemDataProvider
+import ir.training.marvelcomics.data.comic.item.dataprovider.ComicItemDataProvider
 import ir.training.marvelcomics.domain.model.ComicItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -49,6 +49,7 @@ class ComicItemRepositoryImplTest {
             assertEquals(null, awaitItem())
             comicItemRepository.getComicById(1, mutableStateFlow)
             assertEquals(expectedComicItem, awaitItem())
+            assertEquals(cancelAndConsumeRemainingEvents().size, 0)
         }
 
     }
@@ -74,6 +75,7 @@ class ComicItemRepositoryImplTest {
         mutableStateFlow.test {
             assertEquals(null, awaitItem())
             comicItemRepository.getComicById(1, mutableStateFlow)
+            assertEquals(cancelAndConsumeRemainingEvents().size, 0)
         }
 
     }
@@ -145,9 +147,10 @@ class ComicItemRepositoryImplTest {
         mutableStateFlow.test {
             assertEquals(null, awaitItem())
             comicItemRepository.getComicById(1, mutableStateFlow)
-            var item = awaitItem()
+            val item = awaitItem()
             assertNotEquals(expectedComicItem, item)
             assertEquals(differentComicItem, item)
+            assertEquals(cancelAndConsumeRemainingEvents().size, 0)
         }
     }
 
