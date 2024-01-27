@@ -9,7 +9,8 @@ class ComicItemAdapterToComicDBbItem {
             id = comicResponse.id,
             title = comicResponse.title,
             description = comicResponse.description,
-            coverUrl = comicResponse.coverUrl,
+            coverUrlPath = comicResponse.coverUrlPath,
+            coverUrlExtension = comicResponse.coverUrlExtension,
         )
     }
 

@@ -5,7 +5,7 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import ir.training.marvelcomics.data.service.dto.db.comic.ComicDbItem
+import ir.training.marvelcomics.data.service.dto.db.comic.item.ComicDbItem
 import ir.training.marvelcomics.data.service.repository.db.ComicDB
 import ir.training.marvelcomics.data.service.repository.db.dao.ComicDao
 import kotlinx.coroutines.runBlocking

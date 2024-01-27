@@ -27,4 +27,5 @@ abstract class ComicDB : RoomDatabase() {
     }
 
     abstract fun comicDao(): ComicDao
+
 }

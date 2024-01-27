@@ -12,6 +12,8 @@ class ComicDbItem(
     val title: String,
     @ColumnInfo(name = "description")
     val description: String,
-    @ColumnInfo(name = "coverUrl")
-    val coverUrl: String,
+    @ColumnInfo(name = "coverUrlPath")
+    val coverUrlPath: String,
+    @ColumnInfo(name = "coverUrlExtension")
+    val coverUrlExtension: String,
 )

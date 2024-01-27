@@ -7,4 +7,6 @@ interface ServiceRepository {
 
     suspend fun getComicById(id: Int ,flow: MutableStateFlow<ComicItem?>)
 
+    suspend fun getComicList(limit: Int,offset: Int ,flow: MutableStateFlow<List<ComicItem>>)
+
 }

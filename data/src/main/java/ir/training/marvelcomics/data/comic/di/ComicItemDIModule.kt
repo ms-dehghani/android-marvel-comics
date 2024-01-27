@@ -1,4 +1,4 @@
-package ir.training.marvelcomics.data.item.di
+package ir.training.marvelcomics.data.comic.di
 
 import dagger.Module
 import dagger.Provides

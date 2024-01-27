@@ -2,14 +2,15 @@ package ir.training.marvelcomics.data.service.dto.api.comic
 
 import ir.training.marvelcomics.domain.model.ComicItem
 
-class ComicResponseAdapterToComicItem{
+class ComicResponseAdapterToComicItem {
 
     fun map(comicResponse: ComicResponse): ComicItem {
         return ComicItem(
             id = comicResponse.id,
             title = comicResponse.title,
             description = comicResponse.description ?: "",
-            coverUrl = comicResponse.thumbnail.path + "." + comicResponse.thumbnail.extension,
+            coverUrlPath = comicResponse.thumbnail.path,
+            coverUrlExtension = comicResponse.thumbnail.extension,
             publishedDate = "",
             writer = "",
             penciler = ""

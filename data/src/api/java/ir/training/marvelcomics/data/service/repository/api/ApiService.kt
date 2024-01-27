@@ -12,4 +12,10 @@ interface ApiService {
         @Path("id") id: Int,
     ): BaseResponse<ComicResponse?>
 
+    @GET("/v1/public/comics?limit={limit}}&offset={offset}")
+    suspend fun getComicList(
+        @Path("limit") limit: Int,
+        @Path("offset") offset: Int,
+    ): BaseResponse<ComicResponse>
+
 }
