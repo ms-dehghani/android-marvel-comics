@@ -1,11 +1,11 @@
-package ir.training.marvelcomics.viewmodel
+package ir.training.marvelcomics.main.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ir.training.marvelcomics.domain.usecase.comic.list.ComicListUseCase
-import ir.training.marvelcomics.state.ComicListState
-import ir.training.marvelcomics.view.list.ComicListEffect
-import ir.training.marvelcomics.view.list.ComicListEvent
+import ir.training.marvelcomics.main.state.ComicListState
+import ir.training.marvelcomics.main.view.list.ComicListEffect
+import ir.training.marvelcomics.main.view.list.ComicListEvent
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -44,7 +44,7 @@ class ComicListViewModel @Inject constructor(private val comicListUseCase: Comic
     fun onEvent(event: ComicListEvent) {
         when (event) {
             is ComicListEvent.OnComicClicked -> {
-                viewModelScope.launch {}
+                _effectFlow.tryEmit(ComicListEffect.NavigateToComicItemScreen)
             }
 
             is ComicListEvent.OnLoadMoreButtonClicked -> {

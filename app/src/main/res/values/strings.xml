@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">MarvelComics</string>
-      <string name="title_data">data</string>
+    <string name="title_data">data</string>
+
+    <string name="comic_list_screen">Comic List</string>
+    <string name="comic_detail_screen">Comic Detail</string>
 </resources>

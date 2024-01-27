@@ -1,6 +1,7 @@
-package ir.training.marvelcomics.view.list.components
+package ir.training.marvelcomics.main.view.list.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -18,15 +19,22 @@ import coil.compose.rememberImagePainter
 import ir.training.marvelcomics.domain.model.ComicItem
 
 @Composable
-fun ComicListItem(comicItem: ComicItem) {
+fun ComicListItem(
+    comicItem: ComicItem,
+    onComicClicked: (id: Int) -> Unit,
+) {
     Column(
-        modifier = Modifier.padding(16.dp),
+        modifier = Modifier
+            .padding(16.dp)
+            .clickable { onComicClicked(comicItem.id) },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
             painter = rememberImagePainter(data = comicItem.coverUrl),
             contentDescription = "Comic Cover",
-            modifier = Modifier.size(200.dp).clip(shape = RoundedCornerShape(15.dp))
+            modifier = Modifier
+                .size(200.dp)
+                .clip(shape = RoundedCornerShape(15.dp))
         )
         Text(
             text = comicItem.title,

@@ -81,6 +81,8 @@ dependencies {
 
     implementation(libs.lifecycle)
 
+    implementation(libs.navigation)
+
     implementation(libs.hilt)
     kapt(libs.hilt.compiler)
 
@@ -92,6 +94,8 @@ dependencies {
     androidTestImplementation(libs.test.espresso)
     androidTestImplementation(libs.test.junit)
     androidTestImplementation(libs.compose.ui.test)
+
+    androidTestImplementation(libs.test.mockk.android)
 
     testImplementation(libs.test.coroutines)
     testImplementation(libs.test.mockk)

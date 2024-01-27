@@ -1,4 +1,4 @@
-package ir.training.marvelcomics.state
+package ir.training.marvelcomics.main.state
 
 import androidx.paging.PagingData
 import ir.training.marvelcomics.domain.model.ComicItem

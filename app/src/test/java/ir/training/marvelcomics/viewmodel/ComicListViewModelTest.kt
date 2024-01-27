@@ -5,7 +5,8 @@ import io.mockk.coVerify
 import io.mockk.mockk
 import ir.training.marvelcomics.domain.model.ComicItem
 import ir.training.marvelcomics.domain.usecase.comic.list.ComicListUseCase
-import ir.training.marvelcomics.view.list.ComicListEvent
+import ir.training.marvelcomics.main.view.list.ComicListEvent
+import ir.training.marvelcomics.main.viewmodel.ComicListViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
