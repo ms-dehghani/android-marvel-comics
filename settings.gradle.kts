@@ -35,6 +35,9 @@ dependencyResolutionManagement {
             version("paging", "3.0.1")
             version("paging-compose", "1.0.0-alpha12")
             version("lifecycle", "1.1.0-alpha03")
+            version("retrofit", "2.9.0")
+            version("gson", "2.10.1")
+            version("room", "2.6.1")
 
             library("compose-ui", "androidx.compose.ui", "ui").versionRef("compose")
             library("compose-ui-tooling", "androidx.compose.ui", "ui-tooling").versionRef("compose")
@@ -49,6 +52,10 @@ dependencyResolutionManagement {
             library("hilt", "com.google.dagger", "hilt-android").versionRef("hilt")
             library("hilt-compiler", "com.google.dagger", "hilt-android-compiler").versionRef("hilt")
             bundle("hilt", listOf("hilt", "hilt-compiler"))
+
+            library("retrofit", "com.squareup.retrofit2", "retrofit").versionRef("retrofit")
+            library("retrofit-gson", "com.squareup.retrofit2", "converter-gson").versionRef("retrofit")
+            bundle("retrofit", listOf("retrofit", "retrofit-gson"))
 
             library("material3", "androidx.compose.material3", "material3").versionRef("material3")
 
@@ -73,6 +80,11 @@ dependencyResolutionManagement {
             library("lifecycle", "androidx.lifecycle", "lifecycle-viewmodel-compose").versionRef("lifecycle")
 
 
+            library("room-runtime", "androidx.room", "room-runtime").versionRef("room")
+            library("room-compiler", "androidx.room", "room-compiler").versionRef("room")
+            bundle("room", listOf("room-runtime", "room-compiler"))
+
+
             library("jupiter", "org.junit.jupiter", "junit-jupiter-api").versionRef("jupiter")
             library("jupiter-engine", "org.junit.jupiter", "junit-jupiter-engine").versionRef("jupiter")
             bundle("jupiter", listOf("jupiter", "jupiter-engine"))
@@ -85,7 +97,12 @@ dependencyResolutionManagement {
             library("test-hilt", "com.google.dagger", "hilt-android-testing").versionRef("hilt")
             library("test-junit", "androidx.test.ext", "junit-ktx").versionRef("junitKtx")
             library("test-navigation", "androidx.navigation", "navigation-testing").versionRef("navigation")
-            bundle("test", listOf("test-hilt", "test-junit" ,"test-navigation", "test-espresso", "test-coroutines", "test-mockk", "test-turbine"))
+            library("test-room", "androidx.room", "room-testing").versionRef("room")
+            library("test-core-ktx", "androidx.test", "core-ktx").versionRef("core-ktx-test")
+            library("test-junit-ktx", "androidx.test.ext", "junit-ktx").versionRef("junit-ktx-test")
+            bundle("test", listOf("test-hilt", "test-junit" ,"test-navigation",
+                "test-espresso", "test-coroutines", "test-mockk", "test-turbine"
+                ,"test-room","test-core-ktx","test-junit-ktx"))
 
         }
     }
