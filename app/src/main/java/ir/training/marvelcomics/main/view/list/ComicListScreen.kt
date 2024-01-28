@@ -5,10 +5,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.paging.PagingData
-import androidx.paging.compose.LazyPagingItems
 import ir.training.marvelcomics.main.state.ComicListState
+import ir.training.marvelcomics.main.view.list.contract.ComicListEffect
+import ir.training.marvelcomics.main.view.list.contract.ComicListEvent
 import ir.training.marvelcomics.main.viewmodel.ComicListViewModel
+import ir.training.marvelcomics.utli.Util.collectAsLazyPagingItems
 
 @Composable
 fun ComicListScreen(onComicClicked: () -> Unit) {
@@ -28,9 +29,4 @@ fun ComicListScreen(onComicClicked: () -> Unit) {
     ComicListContent(comicItems = state.comicList.collectAsLazyPagingItems(),
         onLoadMoreButtonClicked = { viewModel.onEvent(ComicListEvent.OnLoadMoreButtonClicked) },
         onComicClicked = { viewModel.onEvent(ComicListEvent.OnComicClicked(it)) })
-}
-
-@Composable
-fun <T : Any> PagingData<T>.collectAsLazyPagingItems(): LazyPagingItems<T> {
-    return collectAsLazyPagingItems()
 }

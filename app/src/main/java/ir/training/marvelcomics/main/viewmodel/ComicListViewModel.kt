@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ir.training.marvelcomics.domain.usecase.comic.list.ComicListUseCase
 import ir.training.marvelcomics.main.state.ComicListState
-import ir.training.marvelcomics.main.view.list.ComicListEffect
-import ir.training.marvelcomics.main.view.list.ComicListEvent
+import ir.training.marvelcomics.main.view.list.contract.ComicListEffect
+import ir.training.marvelcomics.main.view.list.contract.ComicListEvent
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
