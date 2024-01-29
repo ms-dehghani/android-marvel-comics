@@ -61,6 +61,15 @@ android {
         kotlinCompilerExtensionVersion = "1.5.8"
     }
 
+    flavorDimensions.add("type")
+    productFlavors {
+        create("api") {
+        }
+
+        create("mock") {
+        }
+    }
+
 }
 
 dependencies {
