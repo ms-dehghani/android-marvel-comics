@@ -8,7 +8,7 @@ import ir.training.marvelcomics.data.service.dto.db.comic.ComicDbItem
 
 @Dao
 interface ComicDao {
-    @Query("SELECT * FROM comic order by id asc LIMIT :limit OFFSET :offset")
+    @Query("SELECT * FROM comic order by id desc LIMIT :limit OFFSET :offset")
     fun getComicList(limit: Int, offset: Int): List<ComicDbItem>
 
     @Query("SELECT * FROM comic WHERE id = :id limit 1")
