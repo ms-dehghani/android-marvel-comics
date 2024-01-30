@@ -50,14 +50,14 @@ class ServiceRepoDIModule {
 
     @Provides
     @Singleton
-    fun provideComicDao(ctx: Context): ComicDao {
-        return ComicDB.getDatabase(ctx).comicDao()
+    fun provideComicDao(ctx: Context): ComicDB {
+        return ComicDB.getDatabase(ctx)
     }
 
     @Provides
     @Singleton
-    fun provideServiceRepository(apiService: ApiService, comicDao: ComicDao): ServiceRepository {
-        return ServiceRepositoryImpl(apiService, comicDao)
+    fun provideServiceRepository(apiService: ApiService, comicDB: ComicDB): ServiceRepository {
+        return ServiceRepositoryImpl(apiService, comicDB)
     }
 
 

@@ -16,7 +16,8 @@ class ServiceRepositoryImplTest {
         val expectedComicItem = ComicItem(
             id = comicId,
             title = "title",
-            coverUrl = "coverUrl",
+            coverUrlPath = "coverUrl",
+            coverUrlExtension = "",
             publishedDate = "",
             writer = "",
             penciler = "",
@@ -31,4 +32,18 @@ class ServiceRepositoryImplTest {
         // Then
         assertEquals(expectedComicItem, mutableStateFlow.value)
     }
+
+    @Test
+    fun testGetComicList() = runBlocking {
+        // Given
+        val mutableStateFlow = MutableStateFlow<List<ComicItem>>(emptyList())
+        val serviceRepository = ServiceRepositoryImpl()
+
+        // When
+        serviceRepository.getComicList(1,0, mutableStateFlow)
+
+        // Then
+        assertEquals(1, mutableStateFlow.value.size)
+    }
+
 }
