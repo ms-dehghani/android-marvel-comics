@@ -1,5 +1,4 @@
-package ir.training.marvelcomics.data.item.dataprovider
-
+package ir.training.marvelcomics.data.comic.item.dataprovider
 import ir.training.marvelcomics.data.ServiceRepository
 import ir.training.marvelcomics.domain.model.ComicItem
 import kotlinx.coroutines.flow.MutableStateFlow
