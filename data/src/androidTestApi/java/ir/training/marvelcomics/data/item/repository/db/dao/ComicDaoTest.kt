@@ -81,7 +81,7 @@ class ComicDaoTest {
         comicDao.insertAll(comicList)
 
         // When
-        val actualComicList = comicDao.getComicList(2, 0)
+        val actualComicList = comicDao.getComicList(2, 0).sortedBy { it.id }
 
         // Then
         assertFalse(actualComicList.isEmpty())
@@ -137,7 +137,7 @@ fun testInsertAll() = runBlocking {
 
     // When
     comicDao.insertAll(comicList)
-    val actualComicList = comicDao.getComicList(2, 0)
+    val actualComicList = comicDao.getComicList(2, 0).sortedBy { it.id }
 
     // Then
     assertFalse(actualComicList.isEmpty())
