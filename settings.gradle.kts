@@ -33,6 +33,10 @@ dependencyResolutionManagement {
             version("test-mockk", "1.13.8")
             version("turbine", "1.0.0")
             version("navigation", "2.7.5")
+            version("coil", "1.4.0")
+            version("paging", "3.0.1")
+            version("paging-compose", "1.0.0-alpha12")
+            version("lifecycle", "1.1.0-alpha03")
             version("retrofit", "2.9.0")
             version("gson", "2.10.1")
             version("room", "2.6.1")
@@ -68,6 +72,15 @@ dependencyResolutionManagement {
             bundle("kotlin", listOf("kotlin-bom", "kotlin-coroutines"))
 
             library("navigation", "androidx.navigation", "navigation-compose").versionRef("navigation")
+
+            library("coil", "io.coil-kt", "coil-compose").versionRef("coil")
+
+            library("paging", "androidx.paging", "paging-runtime-ktx").versionRef("paging")
+            library("paging-compose", "androidx.paging", "paging-compose").versionRef("paging-compose")
+            bundle("paging", listOf("paging", "paging-compose"))
+
+            library("lifecycle", "androidx.lifecycle", "lifecycle-viewmodel-compose").versionRef("lifecycle")
+
 
             library("room-runtime", "androidx.room", "room-runtime").versionRef("room")
             library("room-compiler", "androidx.room", "room-compiler").versionRef("room")

@@ -20,18 +20,19 @@ class ServiceRepositoryImpl : ServiceRepository {
 
     override suspend fun getComicList(
         limit: Int,
-        offset: Int,
-        flow: MutableStateFlow<List<ComicItem>>
-    ) {
-        flow.value = listOf(ComicItem(
-            id = 1,
-            title = "title",
-            coverUrlPath = "coverUrl",
-            coverUrlExtension = "",
-            publishedDate = "",
-            writer = "",
-            penciler = "",
-            description = ""
-        ))
+        offset: Int
+    ): List<ComicItem> {
+        return listOf(
+            ComicItem(
+                id = 1,
+                title = "title",
+                coverUrlPath = "coverUrl",
+                coverUrlExtension = "",
+                publishedDate = "",
+                writer = "",
+                penciler = "",
+                description = ""
+            )
+        )
     }
 }
