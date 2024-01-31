@@ -2,7 +2,6 @@ package ir.training.marvelcomics.data.service.repository
 
 import ir.training.marvelcomics.data.service.ServiceRepositoryImpl
 import ir.training.marvelcomics.domain.model.ComicItem
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -23,27 +22,25 @@ class ServiceRepositoryImplTest {
             penciler = "",
             description = ""
         )
-        val mutableStateFlow = MutableStateFlow<ComicItem?>(null)
         val serviceRepository = ServiceRepositoryImpl()
 
         // When
-        serviceRepository.getComicById(comicId, mutableStateFlow)
+        val comicById = serviceRepository.getComicById(comicId)
 
         // Then
-        assertEquals(expectedComicItem, mutableStateFlow.value)
+        assertEquals(expectedComicItem, comicById)
     }
 
     @Test
     fun testGetComicList() = runBlocking {
         // Given
-        val mutableStateFlow = MutableStateFlow<List<ComicItem>>(emptyList())
         val serviceRepository = ServiceRepositoryImpl()
 
         // When
-        serviceRepository.getComicList(1,0, mutableStateFlow)
+        val comicList = serviceRepository.getComicList(1, 0)
 
         // Then
-        assertEquals(1, mutableStateFlow.value.size)
+        assertEquals(1, comicList.size)
     }
 
 }

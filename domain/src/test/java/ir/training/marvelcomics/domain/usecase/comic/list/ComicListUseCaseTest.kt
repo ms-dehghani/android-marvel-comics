@@ -1,7 +1,14 @@
 package ir.training.marvelcomics.domain.usecase.comic.list
 
+import app.cash.turbine.test
+import io.mockk.coEvery
 import io.mockk.mockk
+import ir.training.marvelcomics.domain.model.ComicItem
 import ir.training.marvelcomics.domain.repository.comic.list.ComicListRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
+import org.junit.Test
 
 internal class ComicListUseCaseTest {
 
@@ -10,16 +17,16 @@ internal class ComicListUseCaseTest {
     private val comicListUseCase = ComicListUseCase(comicListRepository)
 
 
-   /* @Test
+    @Test
     fun givenPageNumber_WhenGetAllComicUseCaseInvoked_ThenExpectedComicsListReturned() =
         runBlocking {
 
-            val page = 1
             val expectedComicList = listOf(
                 ComicItem(
                     id = 1,
                     title = "Batman",
-                    coverUrl = "url1",
+                    coverUrlPath = "url1",
+                    coverUrlExtension = "url1",
                     publishedDate = "published Date1",
                     writer = "Writer1",
                     penciler = "Penciler1",
@@ -27,19 +34,25 @@ internal class ComicListUseCaseTest {
                 ), ComicItem(
                     id = 2,
                     title = "Superman",
-                    coverUrl = "url2",
+                    coverUrlPath = "url2",
+                    coverUrlExtension = "url2",
                     publishedDate = "published Date2",
                     writer = "Writer2",
                     penciler = "Penciler2",
                     description = "Description2"
                 )
             )
-            coEvery { comicListRepository.getAll(page) } returns expectedComicList
 
-            val result = comicListUseCase.invoke(page)
+            coEvery {
+                comicListRepository.getComicList(
+                    any(),
+                    any()
+                )
+            } returns expectedComicList
 
+            val result = comicListUseCase.invoke(10, 0)
             assertEquals(expectedComicList, result)
-        }*/
+        }
 }
 
 

@@ -1,14 +1,10 @@
 package ir.training.marvelcomics.data.comic.item.repository
 
-import app.cash.turbine.test
 import io.mockk.coEvery
 import io.mockk.mockk
 import ir.training.marvelcomics.data.comic.item.dataprovider.ComicItemDataProvider
 import ir.training.marvelcomics.domain.model.ComicItem
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.yield
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Assert.fail
@@ -32,26 +28,15 @@ class ComicItemRepositoryImplTest {
             description = "description"
         )
 
-        val mutableStateFlow = MutableStateFlow<ComicItem?>(null)
-
-
         coEvery {
             mockDataProvider.getComicItemByID(
-                any(),
-                mutableStateFlow
+                any()
             )
-        } coAnswers {
-            yield()
-            mutableStateFlow.update { expectedComicItem }
-        }
+        } returns expectedComicItem
 
-        mutableStateFlow.test {
-            assertEquals(null, awaitItem())
-            comicItemRepository.getComicById(1, mutableStateFlow)
-            assertEquals(expectedComicItem, awaitItem())
-            assertEquals(cancelAndConsumeRemainingEvents().size, 0)
-        }
+        val item = comicItemRepository.getComicById(1)
 
+        assertEquals(expectedComicItem, item)
     }
 
     @Test
@@ -59,25 +44,15 @@ class ComicItemRepositoryImplTest {
         val mockDataProvider = mockk<ComicItemDataProvider>()
         val comicItemRepository = ComicItemRepositoryImpl(mockDataProvider)
 
-        val mutableStateFlow = MutableStateFlow<ComicItem?>(null)
-
-
         coEvery {
             mockDataProvider.getComicItemByID(
-                any(),
-                mutableStateFlow
+                any()
             )
-        } coAnswers {
-            yield()
-            mutableStateFlow.update { null }
-        }
+        } returns null
 
-        mutableStateFlow.test {
-            assertEquals(null, awaitItem())
-            comicItemRepository.getComicById(1, mutableStateFlow)
-            assertEquals(cancelAndConsumeRemainingEvents().size, 0)
-        }
+        val item = comicItemRepository.getComicById(1)
 
+        assertEquals(null, item)
     }
 
     @Test
@@ -85,19 +60,17 @@ class ComicItemRepositoryImplTest {
         // Given
         val mockDataProvider = mockk<ComicItemDataProvider>()
         val comicItemRepository = ComicItemRepositoryImpl(mockDataProvider)
-        val mutableStateFlow = MutableStateFlow<ComicItem?>(null)
 
         // When
         coEvery {
             mockDataProvider.getComicItemByID(
-                any(),
-                mutableStateFlow
+                any()
             )
         } throws Exception("Test exception")
 
         // Then
         try {
-            comicItemRepository.getComicById(1, mutableStateFlow)
+            comicItemRepository.getComicById(1)
             fail("Exception was expected but not thrown")
         } catch (e: Exception) {
             assertEquals("Test exception", e.message)
@@ -130,28 +103,17 @@ class ComicItemRepositoryImplTest {
             description = "different description"
         )
 
-        val mutableStateFlow = MutableStateFlow<ComicItem?>(null)
-
         // When
         coEvery {
             mockDataProvider.getComicItemByID(
-                any(),
-                mutableStateFlow
+                any()
             )
-        } coAnswers {
-            yield()
-            mutableStateFlow.update { differentComicItem }
-        }
+        } returns differentComicItem
 
-        // Then
-        mutableStateFlow.test {
-            assertEquals(null, awaitItem())
-            comicItemRepository.getComicById(1, mutableStateFlow)
-            val item = awaitItem()
-            assertNotEquals(expectedComicItem, item)
-            assertEquals(differentComicItem, item)
-            assertEquals(cancelAndConsumeRemainingEvents().size, 0)
-        }
+        val item = comicItemRepository.getComicById(1)
+
+        assertNotEquals(expectedComicItem, item)
+        assertEquals(differentComicItem, item)
     }
 
 }
