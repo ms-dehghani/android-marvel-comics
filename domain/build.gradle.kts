@@ -50,4 +50,6 @@ dependencies {
 
     implementation(libs.test.junit)
     testImplementation(libs.junit)
+    testImplementation(libs.test.turbine)
+
 }
