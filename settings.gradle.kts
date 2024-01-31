@@ -20,6 +20,7 @@ dependencyResolutionManagement {
             version("hilt", "2.48")
             version("material3", "1.1.2")
             version("core-ktx", "1.12.0")
+            version("core-ktx-test", "1.5.0")
             version("appCompat", "1.6.1")
             version("kotlinBom", "1.8.0")
             version("kotlinCoroutines", "1.7.3")
@@ -110,7 +111,7 @@ dependencyResolutionManagement {
                 "navigation-testing"
             ).versionRef("navigation")
             library("test-room", "androidx.room", "room-testing").versionRef("room")
-            library("test-core-ktx", "androidx.test", "core-ktx").versionRef("core-ktx")
+            library("test-core-ktx", "androidx.test", "core-ktx").versionRef("core-ktx-test")
             library("test-junit-ktx", "androidx.test.ext", "junit-ktx").versionRef("junit-ktx")
             bundle(
                 "test", listOf(
