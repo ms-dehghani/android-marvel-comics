@@ -23,14 +23,13 @@ class ServiceRepositoryImplTest {
             penciler = "",
             description = ""
         )
-        val mutableStateFlow = MutableStateFlow<ComicItem?>(null)
         val serviceRepository = ServiceRepositoryImpl()
 
         // When
-        serviceRepository.getComicById(comicId, mutableStateFlow)
+        val comicById = serviceRepository.getComicById(comicId)
 
         // Then
-        assertEquals(expectedComicItem, mutableStateFlow.value)
+        assertEquals(expectedComicItem, comicById)
     }
 
     @Test
