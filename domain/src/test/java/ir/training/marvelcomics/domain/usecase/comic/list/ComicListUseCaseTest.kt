@@ -1,11 +1,9 @@
 package ir.training.marvelcomics.domain.usecase.comic.list
 
-import app.cash.turbine.test
 import io.mockk.coEvery
 import io.mockk.mockk
 import ir.training.marvelcomics.domain.model.ComicItem
 import ir.training.marvelcomics.domain.repository.comic.list.ComicListRepository
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Test

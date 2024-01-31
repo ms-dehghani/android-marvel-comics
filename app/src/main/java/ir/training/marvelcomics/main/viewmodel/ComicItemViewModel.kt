@@ -3,11 +3,10 @@ package ir.training.marvelcomics.main.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ir.training.marvelcomics.domain.model.ComicItem
 import ir.training.marvelcomics.domain.usecase.comic.item.ComicItemUseCase
 import ir.training.marvelcomics.main.state.ComicItemState
-import ir.training.marvelcomics.main.view.detail.contract.ComicItemEffect
-import ir.training.marvelcomics.main.view.detail.contract.ComicItemEvent
+import ir.training.marvelcomics.main.view.item.contract.ComicItemEffect
+import ir.training.marvelcomics.main.view.item.contract.ComicItemEvent
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -25,9 +24,6 @@ class ComicItemViewModel @Inject constructor(
     private val _state = MutableStateFlow(ComicItemState())
     val state: StateFlow<ComicItemState> = _state.asStateFlow()
 
-    private val _comic = MutableStateFlow<ComicItem?>(null)
-    val comic: StateFlow<ComicItem?> = _comic.asStateFlow()
-
     private val _effectFlow = MutableSharedFlow<ComicItemEffect>(1)
     val effectFlow = _effectFlow.asSharedFlow()
 
@@ -42,7 +38,10 @@ class ComicItemViewModel @Inject constructor(
 
     private fun getComicItem() {
         viewModelScope.launch {
-            comicItemUseCase(_state.value.comicId, _comic)
+            val comic = comicItemUseCase(_state.value.comicId)
+            _state.update { state ->
+                state.copy(comic = comic)
+            }
         }
     }
 

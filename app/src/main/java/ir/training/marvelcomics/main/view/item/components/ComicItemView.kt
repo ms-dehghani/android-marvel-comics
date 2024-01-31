@@ -1,11 +1,9 @@
-package ir.training.marvelcomics.main.view.detail.components
+package ir.training.marvelcomics.main.view.item.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -20,11 +18,12 @@ import ir.training.marvelcomics.R
 import ir.training.marvelcomics.domain.model.ComicItem
 
 @Composable
-fun ComicItemView(comic: ComicItem) {
+fun ComicItemView(
+    comic: ComicItem?,
+    modifier: Modifier = Modifier
+) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
+        modifier = modifier
             .verticalScroll(rememberScrollState())
     ) {
         Image(
@@ -36,7 +35,7 @@ fun ComicItemView(comic: ComicItem) {
                 .clip(RoundedCornerShape(8.dp))
         )
         Text(
-            text = comic.title,
+            text = comic!!.title,
             style = MaterialTheme.typography.headlineLarge,
             color = MaterialTheme.colorScheme.secondary
         )

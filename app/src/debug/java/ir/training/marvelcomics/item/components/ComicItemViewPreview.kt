@@ -1,17 +1,17 @@
-package ir.training.marvelcomics.item
+package ir.training.marvelcomics.item.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import ir.training.marvelcomics.domain.model.ComicItem
-import ir.training.marvelcomics.main.view.item.ComicItemContent
+import ir.training.marvelcomics.main.view.item.components.ComicItemView
 
 @Preview
 @Composable
-fun ComicItemContentPreview() {
+fun ComicItemViewPreview() {
     val comic = ComicItem(
         id = 1,
         title = "Batman",
@@ -22,10 +22,9 @@ fun ComicItemContentPreview() {
         penciler = "Penciler1",
         description = "Description1"
     )
-    ComicItemContent(
-        comic = comic,
-        modifier = Modifier
+    ComicItemView(
+        comic = comic, modifier = Modifier
             .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.background)
+            .padding(16.dp)
     )
 }
