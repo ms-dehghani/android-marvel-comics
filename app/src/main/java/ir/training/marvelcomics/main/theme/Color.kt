@@ -1,4 +1,4 @@
-package ir.training.marvelcomics.ui.theme
+package ir.training.marvelcomics.main.view.theme
 
 import androidx.compose.ui.graphics.Color
 

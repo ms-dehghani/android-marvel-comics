@@ -83,11 +83,20 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.ui.graphics)
 
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
+
+    implementation(libs.lifecycle)
+
+    implementation(libs.navigation)
+
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.test.manifest)
 
     implementation(libs.test.junit)
     testImplementation(libs.junit)
+    testImplementation(libs.test.coroutines)
+    testImplementation(libs.test.mockk)
     androidTestImplementation(libs.test.espresso)
     androidTestImplementation(libs.test.junit)
     androidTestImplementation(libs.compose.ui.test)

@@ -33,6 +33,7 @@ dependencyResolutionManagement {
             version("test-mockk", "1.13.8")
             version("turbine", "1.0.0")
             version("navigation", "2.7.5")
+            version("lifecycle", "1.1.0-alpha03")
             version("retrofit", "2.9.0")
             version("gson", "2.10.1")
             version("room", "2.6.1")
@@ -64,10 +65,24 @@ dependencyResolutionManagement {
             library("junit", "junit", "junit").versionRef("junit")
 
             library("kotlin-bom", "org.jetbrains.kotlin", "kotlin-bom").versionRef("kotlinBom")
-            library("kotlin-coroutines", "org.jetbrains.kotlinx", "kotlinx-coroutines-core").versionRef("kotlinCoroutines")
+            library(
+                "kotlin-coroutines",
+                "org.jetbrains.kotlinx",
+                "kotlinx-coroutines-core"
+            ).versionRef("kotlinCoroutines")
             bundle("kotlin", listOf("kotlin-bom", "kotlin-coroutines"))
 
-            library("navigation", "androidx.navigation", "navigation-compose").versionRef("navigation")
+            library(
+                "navigation",
+                "androidx.navigation",
+                "navigation-compose"
+            ).versionRef("navigation")
+
+            library(
+                "lifecycle",
+                "androidx.lifecycle",
+                "lifecycle-viewmodel-compose"
+            ).versionRef("lifecycle")
 
             library("room-runtime", "androidx.room", "room-runtime").versionRef("room")
             library("room-compiler", "androidx.room", "room-compiler").versionRef("room")
@@ -75,7 +90,11 @@ dependencyResolutionManagement {
 
 
             library("jupiter", "org.junit.jupiter", "junit-jupiter-api").versionRef("jupiter")
-            library("jupiter-engine", "org.junit.jupiter", "junit-jupiter-engine").versionRef("jupiter")
+            library(
+                "jupiter-engine",
+                "org.junit.jupiter",
+                "junit-jupiter-engine"
+            ).versionRef("jupiter")
             bundle("jupiter", listOf("jupiter", "jupiter-engine"))
 
             library("test-coroutines", "org.jetbrains.kotlinx", "kotlinx-coroutines-test").versionRef("kotlinCoroutines")
