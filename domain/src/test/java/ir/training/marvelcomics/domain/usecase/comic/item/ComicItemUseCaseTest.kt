@@ -1,11 +1,9 @@
 package ir.training.marvelcomics.domain.usecase.comic.item
 
-import app.cash.turbine.test
 import io.mockk.coEvery
 import io.mockk.mockk
 import ir.training.marvelcomics.domain.model.ComicItem
 import ir.training.marvelcomics.domain.repository.comic.item.ComicItemRepository
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -29,31 +27,18 @@ class ComicItemUseCaseTest {
             description = "description"
         )
 
-        val mutableStateFlow = MutableStateFlow<ComicItem?>(null)
-        coEvery { mockRepository.getComicById(any() , any()) } coAnswers {
-            mutableStateFlow.value = expectedComicItem
-        }
+        coEvery { mockRepository.getComicById(any()) } returns expectedComicItem
 
-        mutableStateFlow.test {
-            assertEquals(null, awaitItem())
-            getComicUseCase.invoke(1, mutableStateFlow)
-            assertEquals(expectedComicItem, awaitItem())
-            assertEquals(cancelAndConsumeRemainingEvents().size, 0)
-        }
+        val item = getComicUseCase.invoke(1)
+        assertEquals(expectedComicItem, item)
     }
 
     @Test
     fun givenComicIdWhenGetComicUseCaseInvokedAndComicIsNotFoundThenNullComicReturned() =
         runBlocking {
-            val mutableStateFlow = MutableStateFlow<ComicItem?>(null)
-            coEvery { mockRepository.getComicById(any() , any()) } coAnswers {
-                mutableStateFlow.value = null
-            }
+            coEvery { mockRepository.getComicById(any()) } returns null
 
-            mutableStateFlow.test {
-                assertEquals(null, awaitItem())
-                getComicUseCase.invoke(1, mutableStateFlow)
-                assertEquals(cancelAndConsumeRemainingEvents().size, 0)
-            }
+            val item = getComicUseCase.invoke(1)
+            assertEquals(null, item)
         }
 }

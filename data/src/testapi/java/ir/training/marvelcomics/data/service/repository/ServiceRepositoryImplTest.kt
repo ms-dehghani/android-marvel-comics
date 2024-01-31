@@ -62,14 +62,8 @@ class ServiceRepositoryImplTest {
         coEvery { mockDBService.insert(any()) } returns Unit
         coEvery { mockApiService.getComicById(any()) } returns baseResponse
 
-        // When
-        val mutableStateFlow = MutableStateFlow<ComicItem?>(null)
-        mutableStateFlow.test {
-            assertEquals(null, awaitItem())
-            serviceRepository.getComicById(1, mutableStateFlow)
-            assertEquals(expectedComicItem, awaitItem())
-            assertEquals(cancelAndConsumeRemainingEvents().size, 0)
-        }
+        val item = serviceRepository.getComicById(1)
+        assertEquals(expectedComicItem, item)
     }
 
 
@@ -96,12 +90,8 @@ class ServiceRepositoryImplTest {
         coEvery { mockApiService.getComicById(any()) } returns baseResponse
 
         // When
-        val mutableStateFlow = MutableStateFlow<ComicItem?>(null)
-        mutableStateFlow.test {
-            assertEquals(null, awaitItem())
-            serviceRepository.getComicById(1, mutableStateFlow)
-            assertEquals(cancelAndConsumeRemainingEvents().size, 0)
-        }
+        val item = serviceRepository.getComicById(1)
+        assertEquals(null, item)
     }
 
     @Test

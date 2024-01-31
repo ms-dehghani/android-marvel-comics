@@ -12,10 +12,10 @@ import javax.inject.Inject
 
 class ServiceRepositoryImpl @Inject constructor(val api: ApiService, val comicDB: ComicDB) :
     ServiceRepository {
-    override suspend fun getComicById(id: Int, flow: MutableStateFlow<ComicItem?>) {
+    override suspend fun getComicById(id: Int): ComicItem? {
         val dbItem = comicDB.comicDao().getComicById(id)
         if (dbItem != null)
-            flow.value = ComicDbItemAdapterToComicItem().map(dbItem)
+            return ComicDbItemAdapterToComicItem().map(dbItem)
 
         val apiItem =
             api.getComicById(id).data.results[0]?.let {
@@ -24,9 +24,10 @@ class ServiceRepositoryImpl @Inject constructor(val api: ApiService, val comicDB
         if (apiItem != null) {
             ComicItemAdapterToComicDBbItem().map(apiItem).let {
                 comicDB.comicDao().insert(it)
-                flow.value = apiItem
+                return apiItem
             }
         }
+        return null
     }
 
     override suspend fun getComicList(

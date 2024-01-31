@@ -5,8 +5,8 @@ import ir.training.marvelcomics.domain.model.ComicItem
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class ServiceRepositoryImpl : ServiceRepository {
-    override suspend fun getComicById(id: Int, flow: MutableStateFlow<ComicItem?>) {
-        flow.value = ComicItem(
+    override suspend fun getComicById(id: Int): ComicItem? {
+        return ComicItem(
             id = id,
             title = "title",
             coverUrlPath = "coverUrl",
