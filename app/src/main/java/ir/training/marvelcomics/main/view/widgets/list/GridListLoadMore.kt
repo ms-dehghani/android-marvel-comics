@@ -30,7 +30,7 @@ fun GridListLoadMore(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             if (!showLoading) {
-                Text(text = "No comics found!")
+                Text(text = "No items found!")
             } else {
                 CircularProgressIndicator(modifier = Modifier.requiredSize(48.dp, 48.dp))
             }
