@@ -15,7 +15,7 @@ class GridListLoadMoreTest {
     val composeTestRule = createComposeRule()
 
     @Test
-    fun givenEmptyListList_WhenGridListIsDisplayed_ThenEmptyTextVisible() {
+    fun givenEmptyList_WhenGridListIsDisplayed_ThenEmptyTextVisible() {
 
         composeTestRule.setContent {
             GridListLoadMore(
@@ -29,7 +29,7 @@ class GridListLoadMoreTest {
     }
 
     @Test
-    fun givenMockedComicList_WhenGridListIsDisplayed_ThenExpectedComicItemsShouldBeVisible() {
+    fun givenMockedList_WhenGridListIsDisplayed_ThenExpectedListShouldBeVisible() {
 
         val id = "id"
         val list = listOf("1")
@@ -50,7 +50,6 @@ class GridListLoadMoreTest {
         }
 
         composeTestRule.onNodeWithTag(id).assertExists()
-
     }
 
 }

@@ -23,8 +23,6 @@ const val PAGE_SIZE = 10
 class ComicListViewModel @Inject constructor(private val comicUseCase: ComicListUseCase) :
     ViewModel() {
 
-    var currentPage = MutableStateFlow(1)
-
     private val _state = MutableStateFlow(ComicListState())
     val state: StateFlow<ComicListState> = _state.asStateFlow()
 
@@ -65,7 +63,4 @@ class ComicListViewModel @Inject constructor(private val comicUseCase: ComicList
         }
     }
 
-    fun updatePage(newPage: Int) {
-        currentPage.value = newPage
-    }
 }

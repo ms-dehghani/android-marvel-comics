@@ -75,6 +75,9 @@ android {
 
 dependencies {
 
+    implementation(project(mapOf("path" to ":domain")))
+    implementation(project(mapOf("path" to ":data")))
+
     implementation(platform(libs.kotlin.bom))
 
     implementation(libs.compose.ui)
@@ -85,9 +88,6 @@ dependencies {
     implementation(libs.compose.ui.graphics)
 
     implementation(libs.coil)
-
-    implementation(libs.paging)
-    implementation(libs.paging.compose)
 
     implementation(libs.lifecycle)
 
@@ -110,11 +110,8 @@ dependencies {
 
     testImplementation(libs.test.coroutines)
     testImplementation(libs.test.mockk)
+    testImplementation(libs.test.turbine)
 
-    implementation(project(mapOf("path" to ":domain")))
-    implementation(project(mapOf("path" to ":data")))
-
-    implementation(libs.retrofit)
 }
 
 kapt {
