@@ -13,13 +13,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ir.training.marvelcomics.main.state.base.PageState
 
 @Composable
 fun GridListLoadMore(
     items: List<@Composable () -> Unit>,
     onLoadMoreListener: () -> Unit,
-    pageState: PageState,
+    showLoading: Boolean,
     modifier: Modifier = Modifier
 ) {
     val listState = rememberLazyGridState()
@@ -30,7 +29,7 @@ fun GridListLoadMore(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            if (pageState != PageState.LOADING) {
+            if (!showLoading) {
                 Text(text = "No comics found!")
             } else {
                 CircularProgressIndicator(modifier = Modifier.requiredSize(48.dp, 48.dp))
@@ -49,12 +48,12 @@ fun GridListLoadMore(
             ) {
                 items(items.size) { index ->
                     items[index].invoke()
-                    if (index == items.size - 1 && pageState != PageState.LOADING) {
+                    if (index == items.size - 1 && !showLoading) {
                         onLoadMoreListener.invoke()
                     }
                 }
             }
-            if (pageState == PageState.LOADING) {
+            if (showLoading) {
                 CircularProgressIndicator(modifier = Modifier.requiredSize(48.dp, 48.dp))
             }
         }

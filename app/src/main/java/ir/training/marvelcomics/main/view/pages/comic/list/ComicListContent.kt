@@ -25,7 +25,7 @@ fun ComicListContent(
                 }
             },
         onLoadMoreListener = onLoadMoreListener,
-        pageState = pageState,
+        showLoading = pageState == PageState.LOADING,
         modifier = modifier
     )
 }
