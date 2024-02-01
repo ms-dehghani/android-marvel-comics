@@ -1,5 +1,7 @@
 package ir.training.marvelcomics.domain.usecase.comic.list
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import ir.training.marvelcomics.domain.model.ComicItem
 import ir.training.marvelcomics.domain.repository.comic.list.ComicListRepository
 

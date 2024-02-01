@@ -3,6 +3,7 @@ package ir.training.marvelcomics.data.service.repository.db.dao
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import ir.training.marvelcomics.data.service.dto.db.comic.ComicDbItem
 
@@ -14,10 +15,10 @@ interface ComicDao {
     @Query("SELECT * FROM comic WHERE id = :id limit 1")
     fun getComicById(id: Int): ComicDbItem?
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(comic: ComicDbItem)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(comic: List<ComicDbItem>)
 
     @Delete

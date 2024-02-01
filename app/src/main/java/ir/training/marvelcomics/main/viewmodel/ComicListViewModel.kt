@@ -2,10 +2,13 @@ package ir.training.marvelcomics.main.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.training.marvelcomics.domain.usecase.comic.list.ComicListUseCase
 import ir.training.marvelcomics.main.state.ComicListState
 import ir.training.marvelcomics.main.view.list.contract.ComicListEffect
 import ir.training.marvelcomics.main.view.list.contract.ComicListEvent
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +18,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ComicListViewModel @Inject constructor(private val comicListUseCase: ComicListUseCase) :
+@HiltViewModel
+class ComicListViewModel @Inject constructor(private val comicUseCase: ComicListUseCase) :
     ViewModel() {
 
     var currentPage = MutableStateFlow(1)
@@ -23,7 +27,7 @@ class ComicListViewModel @Inject constructor(private val comicListUseCase: Comic
     private val _state = MutableStateFlow(ComicListState())
     val state: StateFlow<ComicListState> = _state.asStateFlow()
 
-    private val _effectFlow = MutableSharedFlow<ComicListEffect>(1)
+    private val _effectFlow = MutableSharedFlow<ComicListEffect>()
     val effectFlow = _effectFlow.asSharedFlow()
 
     init {
@@ -33,12 +37,27 @@ class ComicListViewModel @Inject constructor(private val comicListUseCase: Comic
     }
 
     suspend fun collectComicItems() {
-        comicListUseCase(currentPage.value).collect { pagingData ->
-            _state.value = _state.value.copy(comicList = pagingData)
+        GlobalScope.launch(Dispatchers.IO) {
+            val items = comicUseCase.invoke(20, _state.value.page)
             _state.update { state ->
-                state.copy(comicList = pagingData)
+                state.copy(comicList = _state.value.comicList + items, page = _state.value.page + 1)
             }
         }
+//        Pager(
+//            config = PagingConfig(pageSize = 10, prefetchDistance = 2),
+//            pagingSourceFactory = {
+//                comicPagingSource
+//            }
+//        ).flow
+//        Pager(
+//            config = PagingConfig(pageSize = 10, prefetchDistance = 2),
+//            pagingSourceFactory = { comicPagingSource }
+//        ).flow.collect { pagingData ->
+//            _state.value = _state.value.copy(comicList = pagingData)
+//            _state.update { state ->
+//                state.copy(comicList = pagingData)
+//            }
+//        }
     }
 
     fun onEvent(event: ComicListEvent) {
@@ -47,8 +66,11 @@ class ComicListViewModel @Inject constructor(private val comicListUseCase: Comic
                 _effectFlow.tryEmit(ComicListEffect.NavigateToComicItemScreen)
             }
 
-            is ComicListEvent.OnLoadMoreButtonClicked -> {
-                updatePage(_state.value.page)
+            is ComicListEvent.OnLoadMoreListener -> {
+                viewModelScope.launch {
+                    collectComicItems()
+                }
+//                updatePage(_state.value.page)
             }
         }
     }

@@ -4,6 +4,6 @@ import androidx.paging.PagingData
 import ir.training.marvelcomics.domain.model.ComicItem
 
 data class ComicListState(
-    val comicList: PagingData<ComicItem> = PagingData.empty(),
+    val comicList: List<ComicItem> = emptyList(),
     val page: Int = 1
 )

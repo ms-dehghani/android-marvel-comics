@@ -12,7 +12,8 @@ fun ComicListItemPreview() {
         comicItem = ComicItem(
             id = 123,
             title = "The Amazing Spider-Man",
-            coverUrl = "https://example.com/spiderman.jpg",
+            coverUrlPath = "https://example.com/spiderman.jpg",
+            coverUrlExtension = "",
             publishedDate = "March 1963",
             writer = "Stan Lee",
             penciler = "Penciler",

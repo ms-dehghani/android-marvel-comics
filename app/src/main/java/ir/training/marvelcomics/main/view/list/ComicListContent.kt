@@ -8,10 +8,10 @@ import ir.training.marvelcomics.main.view.list.components.GridList
 
 @Composable
 fun ComicListContent(
-    comicItems: LazyPagingItems<ComicItem>,
-    onLoadMoreButtonClicked: () -> Unit = {},
+    comicItems: List<ComicItem>,
+    onLoadMoreListener: () -> Unit = {},
     onComicClicked: (id: Int) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
-    GridList(comicItems, onLoadMoreButtonClicked, onComicClicked, modifier)
+    GridList(comicItems, onLoadMoreListener, onComicClicked, modifier)
 }

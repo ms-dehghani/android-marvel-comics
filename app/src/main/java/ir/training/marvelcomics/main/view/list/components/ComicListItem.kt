@@ -30,7 +30,7 @@ fun ComicListItem(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = rememberImagePainter(data = comicItem.coverUrl),
+            painter = rememberImagePainter(data = comicItem.coverUrlPath),
             contentDescription = "Comic Cover",
             modifier = Modifier
                 .size(200.dp)

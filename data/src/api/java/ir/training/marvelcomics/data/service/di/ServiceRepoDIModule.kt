@@ -4,6 +4,7 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ir.training.marvelcomics.data.BuildConfig
 import ir.training.marvelcomics.data.ServiceRepository
@@ -50,7 +51,7 @@ class ServiceRepoDIModule {
 
     @Provides
     @Singleton
-    fun provideComicDao(ctx: Context): ComicDB {
+    fun provideComicDao(@ApplicationContext ctx: Context): ComicDB {
         return ComicDB.getDatabase(ctx)
     }
 
