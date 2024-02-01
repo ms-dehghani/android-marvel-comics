@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import ir.training.marvelcomics.main.navigation.MainApp
-import ir.training.marvelcomics.main.viewmodel.ComicListViewModel
+import ir.training.marvelcomics.main.viewmodel.comic.list.ComicListViewModel
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

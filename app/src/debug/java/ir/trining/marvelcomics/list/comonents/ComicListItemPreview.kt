@@ -3,7 +3,7 @@ package ir.trining.marvelcomics.list.comonents
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import ir.training.marvelcomics.domain.model.ComicItem
-import ir.training.marvelcomics.main.view.list.components.ComicListItem
+import ir.training.marvelcomics.main.view.widgets.items.ComicListItem
 
 @Preview
 @Composable

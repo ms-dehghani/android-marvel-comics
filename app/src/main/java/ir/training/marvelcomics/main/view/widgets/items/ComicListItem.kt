@@ -1,4 +1,4 @@
-package ir.training.marvelcomics.main.view.list.components
+package ir.training.marvelcomics.main.view.widgets.items
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable

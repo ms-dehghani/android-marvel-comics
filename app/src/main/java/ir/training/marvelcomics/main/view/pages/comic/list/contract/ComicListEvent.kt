@@ -1,4 +1,4 @@
-package ir.training.marvelcomics.main.view.list.contract
+package ir.training.marvelcomics.main.view.pages.comic.list.contract
 
 sealed class ComicListEvent {
 

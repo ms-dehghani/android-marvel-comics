@@ -8,7 +8,7 @@ import androidx.compose.ui.test.performClick
 import androidx.paging.compose.LazyPagingItems
 import io.mockk.mockk
 import ir.training.marvelcomics.domain.model.ComicItem
-import ir.training.marvelcomics.main.view.list.components.GridList
+import ir.training.marvelcomics.main.view.widgets.list.GridList
 import org.junit.Rule
 import org.junit.Test
 
