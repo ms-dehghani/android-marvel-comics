@@ -5,7 +5,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import ir.training.marvelcomics.main.state.comic.list.ComicListState
-import ir.training.marvelcomics.main.view.pages.comic.list.contract.ComicListEvent
 import ir.training.marvelcomics.main.viewmodel.comic.list.ComicListViewModel
 
 @Composable
@@ -15,7 +14,5 @@ fun ComicListScreen(onComicClicked: () -> Unit) {
     val state: ComicListState by viewModel.state.collectAsState()
 
     ComicListContent(comicItems = state.comicList,
-        pageState = state.pageState,
-        onLoadMoreListener = { viewModel.onEvent(ComicListEvent.OnLoadMoreListener) },
         onComicClicked = { onComicClicked() })
 }

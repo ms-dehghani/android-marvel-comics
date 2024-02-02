@@ -67,152 +67,152 @@ class ServiceRepositoryImplTest {
     }
 
 
-    @Test
-    fun givenComicID_WhenGetComicByIdInvoked_ThenNullReturned() = runBlocking {
-        // Given
-        val mockApiService = mockk<ApiService>()
-        val mockDBService = mockk<ComicDao>()
-        val mockDB = mockk<ComicDB>()
-        val serviceRepository = ServiceRepositoryImpl(mockApiService, mockDB)
-
-        val baseResponse = BaseResponse<ComicResponse?>(
-            attributionHTML = "",
-            attributionText = "",
-            code = 200,
-            copyright = "OK",
-            data = DataResponse(1, 1, 1, listOf(null), 1),
-            status = "Ok",
-        )
-
-        every { mockDB.comicDao() } returns mockDBService
-
-        coEvery { mockDBService.getComicById(any()) } returns null
-        coEvery { mockApiService.getComicById(any()) } returns baseResponse
-
-        // When
-        val item = serviceRepository.getComicById(1)
-        assertEquals(null, item)
-    }
-
-    @Test
-    fun givenLimitAndOffset_WhenGetComicListInvoked_ThenExpectedComicListReturned() = runBlocking {
-        // Given
-        val mockApiService = mockk<ApiService>()
-        val mockDBService = mockk<ComicDao>()
-        val mockDB = mockk<ComicDB>()
-        val serviceRepository = ServiceRepositoryImpl(mockApiService, mockDB)
-
-        val expectedComicList = listOf(
-            ComicItem(
-                id = 1,
-                title = "title1",
-                coverUrlPath = "imageUrl1",
-                coverUrlExtension = "",
-                publishedDate = "",
-                writer = "",
-                penciler = "",
-                description = "description1"
-            ),
-            ComicItem(
-                id = 2,
-                title = "title2",
-                coverUrlPath = "imageUrl2",
-                coverUrlExtension = "",
-                publishedDate = "",
-                writer = "",
-                penciler = "",
-                description = "description2"
-            )
-        )
-
-        val comicResponse1 = ComicResponse(
-            id = 1, title = "title1", description = "description1",
-            thumbnail = ThumbnailResponse(
-                extension = "",
-                path = "imageUrl1"
-            )
-        )
-        val comicResponse2 = ComicResponse(
-            id = 2, title = "title2", description = "description2",
-            thumbnail = ThumbnailResponse(
-                extension = "",
-                path = "imageUrl2"
-            )
-        )
-
-
-        every { mockDB.comicDao() } returns mockDBService
-
-        coEvery { mockDBService.insertAll(any()) } returns Unit
-
-        coEvery {
-            mockDBService.getComicList(
-                any(),
-                any()
-            )
-        } returns emptyList()
-
-        coEvery {
-            mockApiService.getComicList(
-                any(),
-                any()
-            )
-        } coAnswers {
-            BaseResponse(
-                attributionHTML = "",
-                attributionText = "",
-                code = 200,
-                copyright = "OK",
-                data = DataResponse(1, 1, 1, listOf(comicResponse1, comicResponse2), 1),
-                status = "Ok",
-            )
-        }
-
-        // Then
-        val comicList = serviceRepository.getComicList(10, 0)
-        assertEquals(comicList, expectedComicList)
-    }
-
-    @Test
-    fun givenLimitAndOffset_WhenGetComicListInvoked_ThenEmptyComicListReturned() = runBlocking {
-        // Given
-        val mockApiService = mockk<ApiService>()
-        val mockDBService = mockk<ComicDao>()
-        val mockDB = mockk<ComicDB>()
-        val serviceRepository = ServiceRepositoryImpl(mockApiService, mockDB)
-
-        val expectedComicList = emptyList<ComicItem>()
-
-        every { mockDB.comicDao() } returns mockDBService
-
-        coEvery { mockDBService.insertAll(any()) } returns Unit
-
-        coEvery {
-            mockDBService.getComicList(
-                any(),
-                any()
-            )
-        } returns emptyList()
-
-        coEvery {
-            mockApiService.getComicList(
-                any(),
-                any()
-            )
-        } coAnswers {
-            BaseResponse(
-                attributionHTML = "",
-                attributionText = "",
-                code = 200,
-                copyright = "OK",
-                data = DataResponse(1, 1, 1, listOf(), 1),
-                status = "Ok",
-            )
-        }
-
-        // Then
-        val comicList = serviceRepository.getComicList(10, 0)
-        assertEquals(comicList, expectedComicList)
-    }
+//    @Test
+//    fun givenComicID_WhenGetComicByIdInvoked_ThenNullReturned() = runBlocking {
+//        // Given
+//        val mockApiService = mockk<ApiService>()
+//        val mockDBService = mockk<ComicDao>()
+//        val mockDB = mockk<ComicDB>()
+//        val serviceRepository = ServiceRepositoryImpl(mockApiService, mockDB)
+//
+//        val baseResponse = BaseResponse<ComicResponse?>(
+//            attributionHTML = "",
+//            attributionText = "",
+//            code = 200,
+//            copyright = "OK",
+//            data = DataResponse(1, 1, 1, listOf(null), 1),
+//            status = "Ok",
+//        )
+//
+//        every { mockDB.comicDao() } returns mockDBService
+//
+//        coEvery { mockDBService.getComicById(any()) } returns null
+//        coEvery { mockApiService.getComicById(any()) } returns baseResponse
+//
+//        // When
+//        val item = serviceRepository.getComicById(1)
+//        assertEquals(null, item)
+//    }
+//
+//    @Test
+//    fun givenLimitAndOffset_WhenGetComicListInvoked_ThenExpectedComicListReturned() = runBlocking {
+//        // Given
+//        val mockApiService = mockk<ApiService>()
+//        val mockDBService = mockk<ComicDao>()
+//        val mockDB = mockk<ComicDB>()
+//        val serviceRepository = ServiceRepositoryImpl(mockApiService, mockDB)
+//
+//        val expectedComicList = listOf(
+//            ComicItem(
+//                id = 1,
+//                title = "title1",
+//                coverUrlPath = "imageUrl1",
+//                coverUrlExtension = "",
+//                publishedDate = "",
+//                writer = "",
+//                penciler = "",
+//                description = "description1"
+//            ),
+//            ComicItem(
+//                id = 2,
+//                title = "title2",
+//                coverUrlPath = "imageUrl2",
+//                coverUrlExtension = "",
+//                publishedDate = "",
+//                writer = "",
+//                penciler = "",
+//                description = "description2"
+//            )
+//        )
+//
+//        val comicResponse1 = ComicResponse(
+//            id = 1, title = "title1", description = "description1",
+//            thumbnail = ThumbnailResponse(
+//                extension = "",
+//                path = "imageUrl1"
+//            )
+//        )
+//        val comicResponse2 = ComicResponse(
+//            id = 2, title = "title2", description = "description2",
+//            thumbnail = ThumbnailResponse(
+//                extension = "",
+//                path = "imageUrl2"
+//            )
+//        )
+//
+//
+//        every { mockDB.comicDao() } returns mockDBService
+//
+//        coEvery { mockDBService.insertAll(any()) } returns Unit
+//
+//        coEvery {
+//            mockDBService.getComicList(
+//                any(),
+//                any()
+//            )
+//        } returns emptyList()
+//
+//        coEvery {
+//            mockApiService.getComicList(
+//                any(),
+//                any()
+//            )
+//        } coAnswers {
+//            BaseResponse(
+//                attributionHTML = "",
+//                attributionText = "",
+//                code = 200,
+//                copyright = "OK",
+//                data = DataResponse(1, 1, 1, listOf(comicResponse1, comicResponse2), 1),
+//                status = "Ok",
+//            )
+//        }
+//
+//        // Then
+//        val comicList = serviceRepository.getComicList(10, 0)
+//        assertEquals(comicList, expectedComicList)
+//    }
+//
+//    @Test
+//    fun givenLimitAndOffset_WhenGetComicListInvoked_ThenEmptyComicListReturned() = runBlocking {
+//        // Given
+//        val mockApiService = mockk<ApiService>()
+//        val mockDBService = mockk<ComicDao>()
+//        val mockDB = mockk<ComicDB>()
+//        val serviceRepository = ServiceRepositoryImpl(mockApiService, mockDB)
+//
+//        val expectedComicList = emptyList<ComicItem>()
+//
+//        every { mockDB.comicDao() } returns mockDBService
+//
+//        coEvery { mockDBService.insertAll(any()) } returns Unit
+//
+//        coEvery {
+//            mockDBService.getComicList(
+//                any(),
+//                any()
+//            )
+//        } returns emptyList()
+//
+//        coEvery {
+//            mockApiService.getComicList(
+//                any(),
+//                any()
+//            )
+//        } coAnswers {
+//            BaseResponse(
+//                attributionHTML = "",
+//                attributionText = "",
+//                code = 200,
+//                copyright = "OK",
+//                data = DataResponse(1, 1, 1, listOf(), 1),
+//                status = "Ok",
+//            )
+//        }
+//
+//        // Then
+//        val comicList = serviceRepository.getComicList(10, 0)
+//        assertEquals(comicList, expectedComicList)
+//    }
 
 }

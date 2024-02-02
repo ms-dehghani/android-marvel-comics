@@ -17,6 +17,7 @@ interface ApiService {
     suspend fun getComicList(
         @Query("limit") limit: Int,
         @Query("offset") offset: Int,
+        @Query("orderBy") order: String = "focDate",
     ): BaseResponse<ComicResponse>
 
 }

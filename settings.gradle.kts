@@ -85,7 +85,9 @@ dependencyResolutionManagement {
 
             library("room-runtime", "androidx.room", "room-runtime").versionRef("room")
             library("room-compiler", "androidx.room", "room-compiler").versionRef("room")
-            bundle("room", listOf("room-runtime", "room-compiler"))
+            library("room-paging", "androidx.room", "room-paging").versionRef("room")
+            library("room-common", "androidx.room", "room-common").versionRef("room")
+            bundle("room", listOf("room-runtime", "room-compiler","room-paging","room-common"))
 
 
             library("jupiter", "org.junit.jupiter", "junit-jupiter-api").versionRef("jupiter")

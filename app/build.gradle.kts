@@ -88,6 +88,8 @@ dependencies {
     implementation(libs.compose.ui.graphics)
 
     implementation(libs.coil)
+    implementation(libs.paging)
+    implementation(libs.paging.compose)
 
     implementation(libs.lifecycle)
 

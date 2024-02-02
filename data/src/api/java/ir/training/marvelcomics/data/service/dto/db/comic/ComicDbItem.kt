@@ -6,8 +6,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "comic")
 class ComicDbItem(
-    @PrimaryKey
-    val id: Int,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+    @ColumnInfo(name = "comicID")
+    val comicID: Int,
     @ColumnInfo(name = "title")
     val title: String,
     @ColumnInfo(name = "description")

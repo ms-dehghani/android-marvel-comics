@@ -1,9 +1,9 @@
 package ir.training.marvelcomics.main.state.comic.list
 
+import androidx.paging.PagingData
 import ir.training.marvelcomics.domain.model.ComicItem
-import ir.training.marvelcomics.main.state.base.PageState
+import kotlinx.coroutines.flow.Flow
 
 data class ComicListState(
-    val comicList: List<ComicItem> = emptyList(),
-    val pageState: PageState = PageState.LOADING,
+    val comicList: Flow<PagingData<ComicItem>>? = null,
 )

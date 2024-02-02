@@ -40,6 +40,7 @@ fun ComicListItem(
             text = comicItem.title,
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
+            maxLines = 2,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(top = 8.dp)
         )
