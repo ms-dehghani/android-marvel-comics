@@ -1,15 +1,14 @@
 package ir.training.marvelcomics.viewmodel.list
 
-import app.cash.turbine.test
+import androidx.paging.PagingData
 import io.mockk.coEvery
 import io.mockk.mockk
 import ir.training.marvelcomics.domain.model.ComicItem
 import ir.training.marvelcomics.domain.usecase.comic.list.ComicListUseCase
-import ir.training.marvelcomics.main.state.base.PageState
 import ir.training.marvelcomics.main.viewmodel.comic.list.ComicListViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
@@ -37,35 +36,31 @@ class ComicListViewModelTest {
     }
 
     @Test
-    fun givenLimitAndOffset_WhenCollectComicItemsCalls_ThenEmptyListReturned() = runBlocking {
-        coEvery { comicListUseCase.invoke(any(), any()) } returns listOf()
-
-        viewModel.collectComicItems()
-
-        assertEquals(viewModel.state.value.comicList.size, 0)
-    }
-
-    @Test
     fun givenLimitAndOffset_WhenCollectComicItemsCalls_ThenFillListReturned() = runTest {
-        coEvery { comicListUseCase.invoke(any(), any()) } returns listOf(
-            ComicItem(
-                id = 1,
-                title = "title",
-                description = "description",
-                coverUrlExtension = "",
-                coverUrlPath = "",
-                penciler = "",
-                publishedDate = "",
-                writer = ""
+
+        val mutableStateFlow = MutableStateFlow(
+            PagingData.from(
+                listOf(
+                    ComicItem(
+                        id = 1,
+                        title = "title",
+                        coverUrlPath = "description",
+                        coverUrlExtension = "",
+                        publishedDate = "",
+                        writer = "",
+                        penciler = "",
+                        description = ""
+                    )
+                )
             )
         )
 
-        viewModel.state.test {
-            viewModel.collectComicItems()
-            val item = awaitItem()
-            assertEquals(item.comicList.size, 1)
-            assertEquals(PageState.SUCCESS, item.pageState)
-        }
+        coEvery {
+            comicListUseCase.invoke()
+        } returns mutableStateFlow
+
+        val result = comicListUseCase.invoke()
+        assertEquals(mutableStateFlow, result)
     }
 
 }
