@@ -130,7 +130,7 @@ class ServiceRepositoryImplTest {
                 )
             }
 
-            override fun getRefreshKey(state: PagingState<Int, ComicItem>): Int? {
+            override fun getRefreshKey(state: PagingState<Int, ComicItem>): Int {
                 return 0
             }
         }
