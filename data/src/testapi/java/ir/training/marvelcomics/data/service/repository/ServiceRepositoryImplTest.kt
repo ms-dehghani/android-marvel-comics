@@ -1,6 +1,5 @@
 package ir.training.marvelcomics.data.service.repository
 
-import app.cash.turbine.test
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
@@ -12,7 +11,6 @@ import ir.training.marvelcomics.data.service.repository.api.ApiService
 import ir.training.marvelcomics.data.service.repository.db.ComicDB
 import ir.training.marvelcomics.data.service.repository.db.dao.ComicDao
 import ir.training.marvelcomics.domain.model.ComicItem
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Test

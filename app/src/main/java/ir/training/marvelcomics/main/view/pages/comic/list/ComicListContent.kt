@@ -1,6 +1,5 @@
 package ir.training.marvelcomics.main.view.pages.comic.list
 
-import android.util.Log
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
@@ -13,12 +12,9 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
 import ir.training.marvelcomics.domain.model.ComicItem
-import ir.training.marvelcomics.main.state.base.PageState
 import ir.training.marvelcomics.main.view.widgets.items.ComicListItem
 import ir.training.marvelcomics.main.view.widgets.list.GridListLoadMore
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.count
 
 @Composable
 fun ComicListContent(
