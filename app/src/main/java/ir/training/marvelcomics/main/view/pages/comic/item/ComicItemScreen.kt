@@ -1,4 +1,4 @@
-package ir.training.marvelcomics.main.view.item
+package ir.training.marvelcomics.main.view.pages.comic.item
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,9 +9,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import ir.training.marvelcomics.main.view.item.contract.ComicItemEffect
-import ir.training.marvelcomics.main.view.item.contract.ComicItemEvent
-import ir.training.marvelcomics.main.viewmodel.ComicItemViewModel
+import ir.training.marvelcomics.main.view.pages.comic.item.contract.ComicItemEffect
+import ir.training.marvelcomics.main.view.pages.comic.item.contract.ComicItemEvent
+import ir.training.marvelcomics.main.viewmodel.comic.item.ComicItemViewModel
 
 @Composable
 fun ComicItemScreen(onBackButtonClicked: () -> Unit) {

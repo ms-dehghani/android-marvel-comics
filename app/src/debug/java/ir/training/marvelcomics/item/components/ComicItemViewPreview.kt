@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ir.training.marvelcomics.domain.model.ComicItem
-import ir.training.marvelcomics.main.view.item.components.ComicItemView
+import ir.training.marvelcomics.main.view.widgets.item.ComicItemView
 
 @Preview
 @Composable

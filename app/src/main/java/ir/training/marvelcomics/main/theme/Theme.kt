@@ -1,4 +1,4 @@
-package ir.training.marvelcomics.main.view.theme
+package ir.training.marvelcomics.main.theme
 
 import android.app.Activity
 import android.os.Build
@@ -17,30 +17,29 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
-)
-
-private val LightColorScheme = lightColorScheme(
-    /* primary = Purple40,
-     secondary = PurpleGrey40,
-     tertiary = Pink40*/
-    primary = Color(0xFFE91E63),
-    secondary = Color(0xFF9C27B0),
-    tertiary = Color(0xFFF48FB1),
-    onSurface = Color(0xFF9C27B0)
-
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
+    primary = LayerBackground,
+    secondary = Background,
+    tertiary = Background,
+    onSurface = Text,
+    background = Background,
+    surface = LayerBackground,
     onPrimary = Color.White,
     onSecondary = Color.White,
     onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    onBackground = WhiteText,
+)
+
+private val LightColorScheme = lightColorScheme(
+    primary = LayerBackground,
+    secondary = Background,
+    tertiary = Background,
+    onSurface = Text,
+    background = Background,
+    surface = LayerBackground,
+    onPrimary = Color.White,
+    onSecondary = Color.White,
+    onTertiary = Color.White,
+    onBackground = WhiteText,
 )
 
 @Composable

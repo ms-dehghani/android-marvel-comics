@@ -1,4 +1,4 @@
-package ir.trining.marvelcomics.list.comonents
+package ir.training.marvelcomics.list.comonents
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview

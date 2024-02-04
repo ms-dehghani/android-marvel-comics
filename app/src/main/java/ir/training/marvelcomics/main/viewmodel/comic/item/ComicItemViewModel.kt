@@ -1,12 +1,12 @@
-package ir.training.marvelcomics.main.viewmodel
+package ir.training.marvelcomics.main.viewmodel.comic.item
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ir.training.marvelcomics.domain.usecase.comic.item.ComicItemUseCase
 import ir.training.marvelcomics.main.state.ComicItemState
-import ir.training.marvelcomics.main.view.item.contract.ComicItemEffect
-import ir.training.marvelcomics.main.view.item.contract.ComicItemEvent
+import ir.training.marvelcomics.main.view.pages.comic.item.contract.ComicItemEffect
+import ir.training.marvelcomics.main.view.pages.comic.item.contract.ComicItemEvent
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

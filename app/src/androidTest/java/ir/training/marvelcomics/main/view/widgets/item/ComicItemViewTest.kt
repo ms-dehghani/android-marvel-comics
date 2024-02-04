@@ -1,10 +1,9 @@
-package ir.training.marvelcomics.item
+package ir.training.marvelcomics.main.view.widgets.item
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import ir.training.marvelcomics.domain.model.ComicItem
-import ir.training.marvelcomics.main.view.item.components.ComicItemView
 import org.junit.Rule
 import org.junit.Test
 

@@ -6,9 +6,9 @@ import io.mockk.coVerify
 import io.mockk.mockk
 import ir.training.marvelcomics.domain.model.ComicItem
 import ir.training.marvelcomics.domain.usecase.comic.item.ComicItemUseCase
-import ir.training.marvelcomics.main.view.item.contract.ComicItemEffect
-import ir.training.marvelcomics.main.view.item.contract.ComicItemEvent
-import ir.training.marvelcomics.main.viewmodel.ComicItemViewModel
+import ir.training.marvelcomics.main.view.pages.comic.item.contract.ComicItemEffect
+import ir.training.marvelcomics.main.view.pages.comic.item.contract.ComicItemEvent
+import ir.training.marvelcomics.main.viewmodel.comic.item.ComicItemViewModel
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
