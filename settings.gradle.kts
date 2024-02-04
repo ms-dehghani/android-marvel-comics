@@ -33,7 +33,7 @@ dependencyResolutionManagement {
             version("test-mockk", "1.13.8")
             version("turbine", "1.0.0")
             version("navigation", "2.7.5")
-            version("coil", "1.4.0")
+            version("coil", "2.5.0")
             version("paging", "3.0.1")
             version("paging-compose", "3.3.0-alpha02")
             version("lifecycle", "1.1.0-alpha03")
