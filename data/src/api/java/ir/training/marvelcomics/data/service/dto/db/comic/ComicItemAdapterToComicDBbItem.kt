@@ -6,7 +6,7 @@ class ComicItemAdapterToComicDBbItem {
 
     fun map(comicResponse: ComicItem): ComicDbItem {
         return ComicDbItem(
-            id = comicResponse.id,
+            comicID = comicResponse.id,
             title = comicResponse.title,
             description = comicResponse.description,
             coverUrlPath = comicResponse.coverUrlPath,

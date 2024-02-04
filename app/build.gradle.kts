@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -74,6 +75,9 @@ android {
 
 dependencies {
 
+    implementation(project(mapOf("path" to ":domain")))
+    implementation(project(mapOf("path" to ":data")))
+
     implementation(platform(libs.kotlin.bom))
 
     implementation(libs.compose.ui)
@@ -83,28 +87,33 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.ui.graphics)
 
-    implementation(libs.hilt)
-    kapt(libs.hilt.compiler)
+    implementation(libs.coil)
+    implementation(libs.paging)
+    implementation(libs.paging.compose)
 
     implementation(libs.lifecycle)
 
     implementation(libs.navigation)
+
+    implementation(libs.hilt)
+    implementation(libs.hilt.compose)
+    kapt(libs.hilt.compiler)
 
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.test.manifest)
 
     implementation(libs.test.junit)
     testImplementation(libs.junit)
-    testImplementation(libs.test.coroutines)
-    testImplementation(libs.test.mockk)
     androidTestImplementation(libs.test.espresso)
     androidTestImplementation(libs.test.junit)
     androidTestImplementation(libs.compose.ui.test)
 
-    implementation(project(mapOf("path" to ":domain")))
-    implementation(project(mapOf("path" to ":data")))
+    androidTestImplementation(libs.test.mockk.android)
 
-    implementation(libs.retrofit)
+    testImplementation(libs.test.coroutines)
+    testImplementation(libs.test.mockk)
+    testImplementation(libs.test.turbine)
+
 }
 
 kapt {

@@ -1,9 +1,11 @@
 package ir.training.marvelcomics.domain.usecase.comic.list
 
+import androidx.paging.PagingData
 import io.mockk.coEvery
 import io.mockk.mockk
 import ir.training.marvelcomics.domain.model.ComicItem
 import ir.training.marvelcomics.domain.repository.comic.list.ComicListRepository
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -19,37 +21,29 @@ internal class ComicListUseCaseTest {
     fun givenPageNumber_WhenGetAllComicUseCaseInvoked_ThenExpectedComicsListReturned() =
         runBlocking {
 
-            val expectedComicList = listOf(
-                ComicItem(
-                    id = 1,
-                    title = "Batman",
-                    coverUrlPath = "url1",
-                    coverUrlExtension = "url1",
-                    publishedDate = "published Date1",
-                    writer = "Writer1",
-                    penciler = "Penciler1",
-                    description = "Description1"
-                ), ComicItem(
-                    id = 2,
-                    title = "Superman",
-                    coverUrlPath = "url2",
-                    coverUrlExtension = "url2",
-                    publishedDate = "published Date2",
-                    writer = "Writer2",
-                    penciler = "Penciler2",
-                    description = "Description2"
+            val mutableStateFlow = MutableStateFlow(
+                PagingData.from(
+                    listOf(
+                        ComicItem(
+                            1,
+                            "title",
+                            "description",
+                            "",
+                            "",
+                            "",
+                            "",
+                            ""
+                        )
+                    )
                 )
             )
 
             coEvery {
-                comicListRepository.getComicList(
-                    any(),
-                    any()
-                )
-            } returns expectedComicList
+                comicListRepository.getComicList()
+            } returns mutableStateFlow
 
-            val result = comicListUseCase.invoke(10, 0)
-            assertEquals(expectedComicList, result)
+            val result = comicListUseCase.invoke()
+            assertEquals(mutableStateFlow, result)
         }
 }
 
