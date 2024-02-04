@@ -68,12 +68,16 @@ dependencies {
     implementation(libs.retrofit)
 
     implementation(libs.room.runtime)
+    implementation(libs.room.paging)
+    implementation(libs.room.common)
 
     kapt(libs.room.compiler)
 
     implementation(libs.kotlin.coroutines)
 
     implementation(libs.compose.activity)
+
+    implementation(libs.paging)
 
     implementation(libs.hilt)
     kapt(libs.hilt.compiler)

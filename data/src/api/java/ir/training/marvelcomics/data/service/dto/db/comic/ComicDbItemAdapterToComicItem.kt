@@ -4,13 +4,13 @@ import ir.training.marvelcomics.domain.model.ComicItem
 
 class ComicDbItemAdapterToComicItem {
 
-    fun map(comicResponse: ComicDbItem): ComicItem {
+    fun map(comicDbItem: ComicDbItem): ComicItem {
         return ComicItem(
-            id = comicResponse.id,
-            title = comicResponse.title,
-            description = comicResponse.description,
-            coverUrlPath = comicResponse.coverUrlPath,
-            coverUrlExtension = comicResponse.coverUrlExtension,
+            id = comicDbItem.comicID,
+            title = comicDbItem.title,
+            description = comicDbItem.description,
+            coverUrlPath = comicDbItem.coverUrlPath,
+            coverUrlExtension = comicDbItem.coverUrlExtension,
             penciler = "",
             publishedDate = "",
             writer = ""

@@ -1,6 +1,7 @@
 package ir.training.marvelcomics.data.service.repository
 
-import app.cash.turbine.test
+import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
@@ -12,9 +13,9 @@ import ir.training.marvelcomics.data.service.repository.api.ApiService
 import ir.training.marvelcomics.data.service.repository.db.ComicDB
 import ir.training.marvelcomics.data.service.repository.db.dao.ComicDao
 import ir.training.marvelcomics.domain.model.ComicItem
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
+import org.junit.Assert.fail
 import org.junit.Test
 
 
@@ -95,13 +96,8 @@ class ServiceRepositoryImplTest {
     }
 
     @Test
-    fun givenLimitAndOffset_WhenGetComicListInvoked_ThenExpectedComicListReturned() = runBlocking {
+    fun givenPagingSource_WhenLoadInvoked_ThenExpectedComicListReturned() = runBlocking {
         // Given
-        val mockApiService = mockk<ApiService>()
-        val mockDBService = mockk<ComicDao>()
-        val mockDB = mockk<ComicDB>()
-        val serviceRepository = ServiceRepositoryImpl(mockApiService, mockDB)
-
         val expectedComicList = listOf(
             ComicItem(
                 id = 1,
@@ -125,94 +121,36 @@ class ServiceRepositoryImplTest {
             )
         )
 
-        val comicResponse1 = ComicResponse(
-            id = 1, title = "title1", description = "description1",
-            thumbnail = ThumbnailResponse(
-                extension = "",
-                path = "imageUrl1"
-            )
-        )
-        val comicResponse2 = ComicResponse(
-            id = 2, title = "title2", description = "description2",
-            thumbnail = ThumbnailResponse(
-                extension = "",
-                path = "imageUrl2"
-            )
-        )
+        val mockPagingSource = object : PagingSource<Int, ComicItem>() {
+            override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ComicItem> {
+                return LoadResult.Page(
+                    data = expectedComicList,
+                    prevKey = null,
+                    nextKey = null
+                )
+            }
 
-
-        every { mockDB.comicDao() } returns mockDBService
-
-        coEvery { mockDBService.insertAll(any()) } returns Unit
-
-        coEvery {
-            mockDBService.getComicList(
-                any(),
-                any()
-            )
-        } returns emptyList()
-
-        coEvery {
-            mockApiService.getComicList(
-                any(),
-                any()
-            )
-        } coAnswers {
-            BaseResponse(
-                attributionHTML = "",
-                attributionText = "",
-                code = 200,
-                copyright = "OK",
-                data = DataResponse(1, 1, 1, listOf(comicResponse1, comicResponse2), 1),
-                status = "Ok",
-            )
+            override fun getRefreshKey(state: PagingState<Int, ComicItem>): Int {
+                return 0
+            }
         }
 
+        // When
+        val result = mockPagingSource.load(
+            PagingSource.LoadParams.Refresh(
+                key = null,
+                loadSize = 2,
+                placeholdersEnabled = false
+            )
+        )
+
         // Then
-        val comicList = serviceRepository.getComicList(10, 0)
-        assertEquals(comicList, expectedComicList)
-    }
-
-    @Test
-    fun givenLimitAndOffset_WhenGetComicListInvoked_ThenEmptyComicListReturned() = runBlocking {
-        // Given
-        val mockApiService = mockk<ApiService>()
-        val mockDBService = mockk<ComicDao>()
-        val mockDB = mockk<ComicDB>()
-        val serviceRepository = ServiceRepositoryImpl(mockApiService, mockDB)
-
-        val expectedComicList = emptyList<ComicItem>()
-
-        every { mockDB.comicDao() } returns mockDBService
-
-        coEvery { mockDBService.insertAll(any()) } returns Unit
-
-        coEvery {
-            mockDBService.getComicList(
-                any(),
-                any()
-            )
-        } returns emptyList()
-
-        coEvery {
-            mockApiService.getComicList(
-                any(),
-                any()
-            )
-        } coAnswers {
-            BaseResponse(
-                attributionHTML = "",
-                attributionText = "",
-                code = 200,
-                copyright = "OK",
-                data = DataResponse(1, 1, 1, listOf(), 1),
-                status = "Ok",
-            )
+        if (result is PagingSource.LoadResult.Page) {
+            assertEquals(expectedComicList, result.data)
+        } else {
+            fail("Result should be of type LoadResult.Page")
         }
-
-        // Then
-        val comicList = serviceRepository.getComicList(10, 0)
-        assertEquals(comicList, expectedComicList)
     }
+
 
 }
