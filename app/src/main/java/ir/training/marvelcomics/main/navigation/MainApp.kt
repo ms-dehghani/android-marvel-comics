@@ -17,7 +17,7 @@ fun MainApp(
     NavHost(navController, startDestination = Screen.ComicList.name) {
         composable(Screen.ComicList.name) {
             ComicListScreen(onComicClicked = {
-                navController.navigate(Screen.ComicDetail.name)
+                navController.navigate(Screen.ComicDetail.name + "?comicId=$it")
             })
         }
         composable(

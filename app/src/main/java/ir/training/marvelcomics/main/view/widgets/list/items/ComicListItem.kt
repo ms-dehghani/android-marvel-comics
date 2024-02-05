@@ -31,7 +31,7 @@ import ir.training.marvelcomics.utli.helper.image.ImageSize
 @Composable
 fun ComicListItem(
     comicItem: ComicItem,
-    onComicClicked: (id: Int) -> Unit,
+    onComicClicked: (comicItem: ComicItem) -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -47,7 +47,7 @@ fun ComicListItem(
                 )
                 .clip(shape = RoundedCornerShape(dimensionResource(id = R.dimen.card_radios_medium)))
                 .background(color = colorResource(id = R.color.item_background))
-                .clickable { onComicClicked(comicItem.id) },
+                .clickable { onComicClicked(comicItem) },
         ) {
             Text(
                 text = comicItem.title,
@@ -82,7 +82,7 @@ fun ComicListItem(
                 .aspectRatio(0.75f)
                 .clip(shape = RoundedCornerShape(dimensionResource(id = R.dimen.card_radios_small)))
                 .background(color = Color.LightGray)
-                .clickable { onComicClicked(comicItem.id) },
-            )
+                .clickable { onComicClicked(comicItem) },
+        )
     }
 }

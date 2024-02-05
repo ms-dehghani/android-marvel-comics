@@ -31,7 +31,7 @@ import kotlinx.coroutines.flow.Flow
 fun ComicListContent(
     modifier: Modifier = Modifier.background(color = colorResource(id = R.color.page_background)),
     comicItems: Flow<PagingData<ComicItem>>? = null,
-    onComicClicked: (id: Int) -> Unit = {}
+    onComicClicked: (comicItem: ComicItem) -> Unit = {}
 ) {
     Box(
         modifier = modifier.fillMaxSize()
@@ -71,7 +71,7 @@ fun EmptyComicList(modifier: Modifier) {
 @Composable
 fun ComicList(
     comicItems: Flow<PagingData<ComicItem>>,
-    onComicClicked: (id: Int) -> Unit = {},
+    onComicClicked: (comicItem: ComicItem) -> Unit = {},
     modifier: Modifier
 ) {
     val lazyComicItems = comicItems.collectAsLazyPagingItems()

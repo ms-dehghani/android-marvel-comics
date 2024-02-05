@@ -28,7 +28,7 @@ class ComicListViewModel @Inject constructor(private val comicUseCase: ComicList
         MutableStateFlow(ComicListState())
     val state: StateFlow<ComicListState> = _state.asStateFlow()
 
-    private val _effectFlow = MutableSharedFlow<ComicListEffect>()
+    private val _effectFlow = MutableSharedFlow<ComicListEffect>(replay = 1)
     val effectFlow = _effectFlow.asSharedFlow()
 
     init {
@@ -52,7 +52,7 @@ class ComicListViewModel @Inject constructor(private val comicUseCase: ComicList
     fun onEvent(event: ComicListEvent) {
         when (event) {
             is ComicListEvent.OnComicClicked -> {
-                _effectFlow.tryEmit(ComicListEffect.NavigateToComicItemScreen)
+                _effectFlow.tryEmit(ComicListEffect.NavigateToComicItemScreen(event.comicItem))
             }
         }
     }
