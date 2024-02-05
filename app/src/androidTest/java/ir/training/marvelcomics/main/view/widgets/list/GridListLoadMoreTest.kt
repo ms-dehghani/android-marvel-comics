@@ -1,6 +1,8 @@
 package ir.training.marvelcomics.main.view.widgets.list
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -19,13 +21,13 @@ class GridListLoadMoreTest {
 
         composeTestRule.setContent {
             GridListLoadMore(
-                items = listOf(),
-                onLoadMoreListener = {},
+                itemCount = 0,
+                lazyVerticalGrid = {},
                 showLoading = false,
             )
         }
 
-        composeTestRule.onNodeWithText("No items found!").assertExists()
+        composeTestRule.onNodeWithText("No item found!").assertExists()
     }
 
     @Test
@@ -36,12 +38,18 @@ class GridListLoadMoreTest {
 
         composeTestRule.setContent {
             GridListLoadMore(
-                items = list.map { text ->
-                    {
-                        Text(text = text)
+                lazyVerticalGrid = {
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(1),
+                    ) {
+                        items(
+                            count = list.size,
+                        ) { index ->
+                            Text(list[index])
+                        }
                     }
                 },
-                onLoadMoreListener = {},
+                itemCount = 1,
                 showLoading = false,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -50,6 +58,7 @@ class GridListLoadMoreTest {
         }
 
         composeTestRule.onNodeWithTag(id).assertExists()
+        composeTestRule.onNodeWithText(list[0]).assertExists()
     }
 
 }
