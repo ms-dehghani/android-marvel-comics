@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.MarvelComics" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.MarvelComics" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:colorPrimary">@color/page_background</item>
+        <item name="android:colorPrimaryDark">@color/page_background</item>
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+    </style>
+
+    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/page_background</item>
+    </style>
+
 </resources>
