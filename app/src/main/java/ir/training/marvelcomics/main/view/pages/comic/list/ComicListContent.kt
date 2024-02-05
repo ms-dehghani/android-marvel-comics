@@ -3,6 +3,7 @@ package ir.training.marvelcomics.main.view.pages.comic.list
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -22,8 +23,8 @@ import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
 import ir.training.marvelcomics.R
 import ir.training.marvelcomics.domain.model.ComicItem
-import ir.training.marvelcomics.main.view.widgets.items.ComicListItem
 import ir.training.marvelcomics.main.view.widgets.list.GridListLoadMore
+import ir.training.marvelcomics.main.view.widgets.list.items.ComicListItem
 import kotlinx.coroutines.flow.Flow
 
 @Composable
@@ -33,7 +34,7 @@ fun ComicListContent(
     onComicClicked: (id: Int) -> Unit = {}
 ) {
     Box(
-        modifier = modifier
+        modifier = modifier.fillMaxSize()
     ) {
         Column {
             Text(
@@ -60,14 +61,7 @@ fun ComicListContent(
 @Composable
 fun EmptyComicList(modifier: Modifier) {
     GridListLoadMore(
-        lazyVerticalGrid = {
-            Text(
-                text = stringResource(id = R.string.no_item_found),
-                color = colorResource(id = R.color.text_color_primary),
-                fontSize = dimensionResource(id = R.dimen.font_size_large).value.sp,
-                fontWeight = FontWeight.Bold,
-            )
-        },
+        lazyVerticalGrid = {},
         itemCount = 0,
         showLoading = true,
         modifier = modifier

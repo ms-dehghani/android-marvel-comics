@@ -1,4 +1,4 @@
-package ir.training.marvelcomics.main.view.widgets.items
+package ir.training.marvelcomics.main.view.widgets.list.items
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -83,7 +83,6 @@ fun ComicListItem(
                 .clip(shape = RoundedCornerShape(dimensionResource(id = R.dimen.card_radios_small)))
                 .background(color = Color.LightGray)
                 .clickable { onComicClicked(comicItem.id) },
-
             )
     }
 }

@@ -4,7 +4,7 @@ package ir.training.marvelcomics.view.widgets.items
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
 import ir.training.marvelcomics.domain.model.ComicItem
-import ir.training.marvelcomics.main.view.widgets.items.ComicListItem
+import ir.training.marvelcomics.main.view.widgets.list.items.ComicListItem
 import org.junit.Rule
 import org.junit.Test
 

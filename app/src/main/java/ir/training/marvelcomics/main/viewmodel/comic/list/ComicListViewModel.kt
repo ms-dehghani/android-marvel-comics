@@ -35,7 +35,7 @@ class ComicListViewModel @Inject constructor(private val comicUseCase: ComicList
         collectComicItems()
     }
 
-    fun collectComicItems() {
+    private fun collectComicItems() {
         viewModelScope.launch(Dispatchers.IO) {
             comicUseCase.invoke().cachedIn(viewModelScope).catch { e ->
                 Log.e("ComicListContent", "Error: ${e.message}")
