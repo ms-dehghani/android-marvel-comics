@@ -1,4 +1,4 @@
-package ir.training.marvelcomics.main.view.widgets.list
+package ir.training.marvelcomics.main.view.widgets.list.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -26,67 +26,47 @@ fun GridListLoadMore(
     showLoading: Boolean,
 ) {
     if (itemCount == 0) {
-        if (showLoading)
-            EmptyListLoading(modifier = modifier)
-        else
-            EmptyView(modifier = modifier)
-    } else {
-        NotEmptyList(
-            modifier = modifier,
-            lazyVerticalGrid = lazyVerticalGrid,
-            showLoading = showLoading
-        )
-    }
-}
-
-@Composable
-fun EmptyListLoading(
-    modifier: Modifier = Modifier,
-) {
-    Column(
-        modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        CircularProgressIndicator(
-            color = colorResource(id = R.color.text_color_primary),
-            modifier = modifier.requiredSize(
-                dimensionResource(id = R.dimen.progress_size),
-                dimensionResource(id = R.dimen.progress_size)
-            )
-        )
-    }
-}
-
-@Composable
-fun NotEmptyList(
-    modifier: Modifier = Modifier,
-    lazyVerticalGrid: @Composable () -> Unit,
-    showLoading: Boolean,
-) {
-    Box(
-        modifier = modifier.fillMaxSize()
-    ) {
-        lazyVerticalGrid.invoke()
         if (showLoading) {
-            Box(
-                modifier = modifier
-                    .size(
-                        dimensionResource(id = R.dimen.progress_size),
-                        dimensionResource(id = R.dimen.progress_size)
-                    )
-                    .background(
-                        color = colorResource(id = R.color.page_background),
-                        shape = CircleShape
-                    )
-                    .padding(dimensionResource(id = R.dimen.padding_small))
-                    .align(Alignment.BottomCenter)
+            Column(
+                modifier = modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 CircularProgressIndicator(
                     color = colorResource(id = R.color.text_color_primary),
-                    modifier = modifier
-                        .padding(dimensionResource(id = R.dimen.padding_small))
+                    modifier = modifier.requiredSize(
+                        dimensionResource(id = R.dimen.progress_size),
+                        dimensionResource(id = R.dimen.progress_size)
+                    )
                 )
+            }
+        } else
+            EmptyView(modifier = modifier)
+    } else {
+        Box(
+            modifier = modifier.fillMaxSize()
+        ) {
+            lazyVerticalGrid.invoke()
+            if (showLoading) {
+                Box(
+                    modifier = modifier
+                        .size(
+                            dimensionResource(id = R.dimen.progress_size),
+                            dimensionResource(id = R.dimen.progress_size)
+                        )
+                        .background(
+                            color = colorResource(id = R.color.page_background),
+                            shape = CircleShape
+                        )
+                        .padding(dimensionResource(id = R.dimen.padding_small))
+                        .align(Alignment.BottomCenter)
+                ) {
+                    CircularProgressIndicator(
+                        color = colorResource(id = R.color.text_color_primary),
+                        modifier = modifier
+                            .padding(dimensionResource(id = R.dimen.padding_small))
+                    )
+                }
             }
         }
     }

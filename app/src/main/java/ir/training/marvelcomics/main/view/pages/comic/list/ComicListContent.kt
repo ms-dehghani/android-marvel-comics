@@ -23,7 +23,7 @@ import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
 import ir.training.marvelcomics.R
 import ir.training.marvelcomics.domain.model.ComicItem
-import ir.training.marvelcomics.main.view.widgets.list.GridListLoadMore
+import ir.training.marvelcomics.main.view.widgets.list.view.GridListLoadMore
 import ir.training.marvelcomics.main.view.widgets.list.items.ComicListItem
 import kotlinx.coroutines.flow.Flow
 
