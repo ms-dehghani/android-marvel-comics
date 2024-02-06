@@ -19,8 +19,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import ir.training.marvelcomics.R
 import ir.training.marvelcomics.domain.model.ComicItem
 import ir.training.marvelcomics.util.helper.image.ImageHelper
 import ir.training.marvelcomics.util.helper.image.ImageSize
@@ -33,7 +36,7 @@ fun ComicItemView(
         modifier = modifier
             .fillMaxWidth()
             .verticalScroll(rememberScrollState())
-            .background(color = Color(0xFF18162e))
+            .background(color = MaterialTheme.colorScheme.background)
     ) {
         AsyncImage(
             model = ImageHelper.getThumbnailUrl(
@@ -61,13 +64,13 @@ fun ComicItemView(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(16.dp)
+                    .padding(dimensionResource(id = R.dimen.page_padding))
             ) {
                 Text(
                     modifier = Modifier.padding(top = 10.dp),
                     text = comic.title,
-                    style = MaterialTheme.typography.headlineLarge,
-                    color = Color(0xFFfaf9ff)
+                    style = MaterialTheme.typography.headlineMedium,
+                    color = colorResource(id = R.color.text_color_primary)
                 )
                 ExpandableText(
                     text = comic.description,
@@ -77,18 +80,18 @@ fun ComicItemView(
                 Text(
                     modifier = Modifier.padding(top = 10.dp),
                     text = comic.publishedDate,
-                    style = MaterialTheme.typography.labelLarge,
-                    color = Color(0xFF565574)
+                    style = MaterialTheme.typography.labelMedium,
+                    color = colorResource(id = R.color.text_color_secondary)
                 )
                 Text(
                     text = comic.writer,
-                    style = MaterialTheme.typography.labelLarge,
-                    color = Color(0xFF565574)
+                    style = MaterialTheme.typography.labelMedium,
+                    color = colorResource(id = R.color.text_color_secondary)
                 )
                 Text(
                     text = comic.penciler,
-                    style = MaterialTheme.typography.labelLarge,
-                    color = Color(0xFF565574)
+                    style = MaterialTheme.typography.labelMedium,
+                    color = colorResource(id = R.color.text_color_secondary)
                 )
             }
         }
