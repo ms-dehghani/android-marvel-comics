@@ -11,9 +11,10 @@ class ComicResponseAdapterToComicItem {
             description = comicResponse.description ?: "",
             coverUrlPath = comicResponse.thumbnail.path,
             coverUrlExtension = comicResponse.thumbnail.extension,
-            publishedDate = "",
-            writer = "",
-            penciler = ""
+            publishedDate = comicResponse.modified ?: "",
+            writer = comicResponse.creators.items.firstOrNull { it.role == "writer" }?.name ?: "",
+            penciler = comicResponse.creators.items.firstOrNull { it.role.contains("penciller") }?.name
+                ?: ""
         )
     }
 

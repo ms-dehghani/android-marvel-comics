@@ -11,6 +11,9 @@ class ComicItemAdapterToComicDBbItem {
             description = comicResponse.description,
             coverUrlPath = comicResponse.coverUrlPath,
             coverUrlExtension = comicResponse.coverUrlExtension,
+            publishedDate = comicResponse.publishedDate,
+            penciler = comicResponse.penciler,
+            writer = comicResponse.writer,
         )
     }
 

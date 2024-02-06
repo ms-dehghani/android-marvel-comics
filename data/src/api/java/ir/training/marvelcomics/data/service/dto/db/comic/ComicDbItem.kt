@@ -18,4 +18,10 @@ class ComicDbItem(
     val coverUrlPath: String,
     @ColumnInfo(name = "coverUrlExtension")
     val coverUrlExtension: String,
+    @ColumnInfo(name = "writer")
+    val writer: String,
+    @ColumnInfo(name = "penciler")
+    val penciler: String,
+    @ColumnInfo(name = "publishedDate")
+    val publishedDate: String,
 )
