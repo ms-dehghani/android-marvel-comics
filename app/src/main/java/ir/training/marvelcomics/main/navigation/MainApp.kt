@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import ir.training.marvelcomics.main.view.pages.comic.item.ComicItemScreen
 import ir.training.marvelcomics.main.view.pages.comic.list.ComicListScreen
 import ir.training.marvelcomics.util.navigation.Screen
 
@@ -29,7 +30,9 @@ fun MainApp(
                 defaultValue = -1
             }),
         ) {
-
+            ComicItemScreen {
+                navController.navigateUp()
+            }
         }
     }
 }

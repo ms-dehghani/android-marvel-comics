@@ -37,6 +37,7 @@ fun ComicItemScreen(onBackButtonClicked: () -> Unit) {
             }
         }
     }
+
     if (!isLoading) {
         ComicItemContent(
             comic = state.comic,

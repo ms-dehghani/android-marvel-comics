@@ -30,9 +30,9 @@ class ComicItemViewModel @Inject constructor(
     val effectFlow = _effectFlow.asSharedFlow()
 
     init {
-        savedStateHandle.get<Int>("comicId")?.let { noteId ->
+        savedStateHandle.get<Int>("comicId")?.let { comicID ->
             _state.update { state ->
-                state.copy(comicId = noteId)
+                state.copy(comicId = comicID)
             }
             getComicItem()
         }
