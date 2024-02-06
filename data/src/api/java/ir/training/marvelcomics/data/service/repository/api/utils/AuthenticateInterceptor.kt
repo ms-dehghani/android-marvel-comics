@@ -1,6 +1,5 @@
 package ir.training.marvelcomics.data.service.repository.api.utils
 
-import android.util.Log
 import ir.training.marvelcomics.data.BuildConfig
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
@@ -26,8 +25,6 @@ class AuthenticateInterceptor @Inject constructor() : Interceptor {
                 )
             ).addQueryParameter("ts", currentTimeMillis)
             .build()
-
-        Log.d("AuthenticateInterceptor", "intercept: ${url.url()}")
 
         // Request customization: add request headers
         val requestBuilder: Request.Builder = original.newBuilder()

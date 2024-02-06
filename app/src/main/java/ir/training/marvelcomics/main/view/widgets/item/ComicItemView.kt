@@ -32,6 +32,7 @@ import ir.training.marvelcomics.util.helper.image.ImageSize
 fun ComicItemView(
     comic: ComicItem?, modifier: Modifier = Modifier
 ) {
+
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -79,7 +80,7 @@ fun ComicItemView(
                 )
                 Text(
                     modifier = Modifier.padding(top = 10.dp),
-                    text = comic.publishedDate,
+                    text = comic.publishedDate.split("T")[0].replace("-", "/", true),
                     style = MaterialTheme.typography.labelMedium,
                     color = colorResource(id = R.color.text_color_secondary)
                 )
