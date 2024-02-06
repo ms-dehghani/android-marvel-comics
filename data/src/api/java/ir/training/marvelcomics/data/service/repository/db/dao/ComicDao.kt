@@ -13,7 +13,7 @@ interface ComicDao {
     @Query("SELECT * FROM comic order by id asc")
     fun getComicList(): PagingSource<Int, ComicDbItem>
 
-    @Query("SELECT * FROM comic WHERE id = :id limit 1")
+    @Query("SELECT * FROM comic WHERE comicID = :id limit 1")
     fun getComicById(id: Int): ComicDbItem?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

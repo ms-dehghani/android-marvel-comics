@@ -1,4 +1,4 @@
-package ir.training.marvelcomics.utli.helper.image
+package ir.training.marvelcomics.util.helper.image
 
 enum class ImageSize(val value: String) {
     SMALL("small"),

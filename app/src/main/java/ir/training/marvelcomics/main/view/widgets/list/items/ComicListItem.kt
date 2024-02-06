@@ -25,8 +25,8 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import ir.training.marvelcomics.R
 import ir.training.marvelcomics.domain.model.ComicItem
-import ir.training.marvelcomics.utli.helper.image.ImageHelper
-import ir.training.marvelcomics.utli.helper.image.ImageSize
+import ir.training.marvelcomics.util.helper.image.ImageHelper
+import ir.training.marvelcomics.util.helper.image.ImageSize
 
 @Composable
 fun ComicListItem(

@@ -10,6 +10,7 @@ import ir.training.marvelcomics.main.state.comic.list.ComicListState
 import ir.training.marvelcomics.main.view.pages.comic.list.contract.ComicListEffect
 import ir.training.marvelcomics.main.view.pages.comic.list.contract.ComicListEvent
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -49,10 +50,12 @@ class ComicListViewModel @Inject constructor(private val comicUseCase: ComicList
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     fun onEvent(event: ComicListEvent) {
         when (event) {
             is ComicListEvent.OnComicClicked -> {
                 _effectFlow.tryEmit(ComicListEffect.NavigateToComicItemScreen(event.comicItem))
+                _effectFlow.resetReplayCache()
             }
         }
     }

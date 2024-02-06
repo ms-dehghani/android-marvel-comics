@@ -1,4 +1,4 @@
-package ir.training.marvelcomics.utli.helper.image
+package ir.training.marvelcomics.util.helper.image
 
 class ImageHelper {
 

@@ -4,7 +4,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import ir.training.marvelcomics.main.view.widgets.list.GridListLoadMore
+import ir.training.marvelcomics.main.view.widgets.list.view.GridListLoadMore
 import androidx.compose.material3.Text
 
 @Preview
