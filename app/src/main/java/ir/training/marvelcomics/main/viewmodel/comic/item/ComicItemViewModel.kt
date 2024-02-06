@@ -3,10 +3,12 @@ package ir.training.marvelcomics.main.viewmodel.comic.item
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.training.marvelcomics.domain.usecase.comic.item.ComicItemUseCase
 import ir.training.marvelcomics.main.state.ComicItemState
 import ir.training.marvelcomics.main.view.pages.comic.item.contract.ComicItemEffect
 import ir.training.marvelcomics.main.view.pages.comic.item.contract.ComicItemEvent
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,9 +18,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class ComicItemViewModel @Inject constructor(
-    private val comicItemUseCase: ComicItemUseCase,
-    savedStateHandle: SavedStateHandle
+    private val comicItemUseCase: ComicItemUseCase, savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(ComicItemState())
@@ -28,7 +30,7 @@ class ComicItemViewModel @Inject constructor(
     val effectFlow = _effectFlow.asSharedFlow()
 
     init {
-        savedStateHandle.get<Int>("noteId")?.let { noteId ->
+        savedStateHandle.get<Int>("comicId")?.let { noteId ->
             _state.update { state ->
                 state.copy(comicId = noteId)
             }
@@ -37,10 +39,12 @@ class ComicItemViewModel @Inject constructor(
     }
 
     private fun getComicItem() {
-        viewModelScope.launch {
-            val comic = comicItemUseCase(_state.value.comicId)
-            _state.update { state ->
-                state.copy(comic = comic)
+        viewModelScope.launch(Dispatchers.IO) {
+            comicItemUseCase(_state.value.comicId).also { comic ->
+                _state.update { state ->
+                    state.copy(comic = comic)
+                }
+                _effectFlow.tryEmit(ComicItemEffect.OnComicItemReceived)
             }
         }
     }

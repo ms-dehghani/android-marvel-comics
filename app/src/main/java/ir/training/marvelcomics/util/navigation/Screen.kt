@@ -1,4 +1,4 @@
-package ir.training.marvelcomics.util
+package ir.training.marvelcomics.util.navigation
 
 import androidx.annotation.StringRes
 import ir.training.marvelcomics.R

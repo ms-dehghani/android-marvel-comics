@@ -9,7 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import ir.training.marvelcomics.main.view.pages.comic.item.ComicItemScreen
 import ir.training.marvelcomics.main.view.pages.comic.list.ComicListScreen
-import ir.training.marvelcomics.util.Screen
+import ir.training.marvelcomics.util.navigation.Screen
 
 @Composable
 fun MainApp(

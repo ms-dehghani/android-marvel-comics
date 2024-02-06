@@ -1,7 +1,7 @@
-package ir.training.marvelcomics.utli.helper
+package ir.training.marvelcomics.util.helper
 
-import ir.training.marvelcomics.utli.helper.image.ImageSize
-import ir.training.marvelcomics.utli.helper.image.ImageType
+import ir.training.marvelcomics.util.helper.image.ImageSize
+import ir.training.marvelcomics.util.helper.image.ImageType
 
 class ImageHelper {
 
