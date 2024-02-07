@@ -3,6 +3,7 @@ package ir.training.marvelcomics.main.view.widgets.list.items
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -49,21 +50,53 @@ fun ComicListItem(
                 .background(color = colorResource(id = R.color.item_background))
                 .clickable { onComicClicked(comicItem) },
         ) {
-            Text(
-                text = comicItem.title,
-                fontWeight = FontWeight.Bold,
-                fontSize = dimensionResource(id = R.dimen.font_size_small).value.sp,
-                maxLines = 2,
-                color = colorResource(id = R.color.text_color_primary),
-                textAlign = TextAlign.Start,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.padding(
-                    top = dimensionResource(id = R.dimen.padding_large),
-                    start = dimensionResource(id = R.dimen.comic_list_image_width)
-                            + (dimensionResource(id = R.dimen.padding_large) * 2),
-                    end = dimensionResource(id = R.dimen.padding_large)
+            Column {
+                Text(
+                    text = comicItem.title,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = dimensionResource(id = R.dimen.font_size_small).value.sp,
+                    maxLines = 2,
+                    color = colorResource(id = R.color.text_color_primary),
+                    textAlign = TextAlign.Start,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(
+                        top = dimensionResource(id = R.dimen.padding_large),
+                        start = dimensionResource(id = R.dimen.comic_list_image_width)
+                                + (dimensionResource(id = R.dimen.padding_large) * 2),
+                        end = dimensionResource(id = R.dimen.padding_large)
+                    )
                 )
-            )
+                Text(
+                    text = "Writer: ${comicItem.writer.ifEmpty { "N/A" }}",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = dimensionResource(id = R.dimen.font_size_small).value.sp,
+                    maxLines = 1,
+                    color = colorResource(id = R.color.text_color_secondary),
+                    textAlign = TextAlign.Start,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(
+                        top = dimensionResource(id = R.dimen.padding_large),
+                        start = dimensionResource(id = R.dimen.comic_list_image_width)
+                                + (dimensionResource(id = R.dimen.padding_large) * 2),
+                        end = dimensionResource(id = R.dimen.padding_large)
+                    )
+                )
+                Text(
+                    text = "Penciller: ${comicItem.penciler.ifEmpty { "N/A" }}",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = dimensionResource(id = R.dimen.font_size_small).value.sp,
+                    maxLines = 1,
+                    color = colorResource(id = R.color.text_color_secondary),
+                    textAlign = TextAlign.Start,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(
+                        start = dimensionResource(id = R.dimen.comic_list_image_width)
+                                + (dimensionResource(id = R.dimen.padding_large) * 2),
+                        end = dimensionResource(id = R.dimen.padding_large)
+                    )
+                )
+            }
+
         }
         AsyncImage(
             model = ImageHelper.getThumbnailUrl(

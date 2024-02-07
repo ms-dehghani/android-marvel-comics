@@ -11,9 +11,9 @@ class ComicDbItemAdapterToComicItem {
             description = comicDbItem.description,
             coverUrlPath = comicDbItem.coverUrlPath,
             coverUrlExtension = comicDbItem.coverUrlExtension,
-            penciler = "",
-            publishedDate = "",
-            writer = ""
+            penciler = comicDbItem.penciler,
+            publishedDate = comicDbItem.publishedDate,
+            writer = comicDbItem.writer,
         )
     }
 
