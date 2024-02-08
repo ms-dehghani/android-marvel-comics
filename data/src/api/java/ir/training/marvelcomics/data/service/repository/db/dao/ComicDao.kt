@@ -16,6 +16,10 @@ interface ComicDao {
     @Query("SELECT * FROM comic WHERE comicID = :id limit 1")
     fun getComicById(id: Int): ComicDbItem?
 
+
+    @Query("SELECT id FROM comic order by id desc limit 1")
+    fun getLastID(): Int
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(comic: ComicDbItem)
 
