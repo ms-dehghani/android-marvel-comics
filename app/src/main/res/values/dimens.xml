@@ -6,7 +6,7 @@
     <dimen name="padding_medium">10dp</dimen>
     <dimen name="padding_large">15dp</dimen>
 
-    <dimen name="progress_size">48dp</dimen>
+    <dimen name="progress_size">52dp</dimen>
 
     <dimen name="card_radios_medium">10dp</dimen>
     <dimen name="card_radios_small">5dp</dimen>
