@@ -58,6 +58,12 @@ android {
     buildFeatures {
         buildConfig = true
     }
+
+    packaging {
+        resources {
+            resources.excludes.add("META-INF/*")
+        }
+    }
 }
 
 dependencies {
@@ -89,6 +95,7 @@ dependencies {
 
     testImplementation(libs.test.turbine)
 
+    androidTestImplementation(libs.test.mockk.android)
     androidTestImplementation(libs.test.espresso)
     androidTestImplementation(libs.test.coroutines)
     androidTestImplementation(libs.test.junit)

@@ -8,6 +8,8 @@ import io.mockk.mockk
 import ir.training.marvelcomics.data.service.dto.api.base.BaseResponse
 import ir.training.marvelcomics.data.service.dto.api.base.DataResponse
 import ir.training.marvelcomics.data.service.dto.api.comic.ComicResponse
+import ir.training.marvelcomics.data.service.dto.api.creators.CreatorItem
+import ir.training.marvelcomics.data.service.dto.api.creators.CreatorsResponse
 import ir.training.marvelcomics.data.service.dto.api.thumbnail.ThumbnailResponse
 import ir.training.marvelcomics.data.service.repository.api.ApiService
 import ir.training.marvelcomics.data.service.repository.db.ComicDB
@@ -42,10 +44,15 @@ class ServiceRepositoryImplTest {
         )
         val comicResponse = ComicResponse(
             id = 1, title = "title", description = "description",
+            modified = "",
             thumbnail = ThumbnailResponse(
                 extension = "",
                 path = "imageUrl"
-            )
+            ),
+            creators = CreatorsResponse("" , listOf(
+                CreatorItem("", ""),
+                CreatorItem("", ""),
+            ))
         )
 
         val baseResponse = BaseResponse<ComicResponse?>(
