@@ -1,5 +1,7 @@
 package ir.training.marvelcomics.data.service.repository
 
+import androidx.paging.map
+import app.cash.turbine.test
 import ir.training.marvelcomics.data.service.ServiceRepositoryImpl
 import ir.training.marvelcomics.domain.model.ComicItem
 import kotlinx.coroutines.runBlocking
@@ -36,11 +38,25 @@ class ServiceRepositoryImplTest {
         // Given
         val serviceRepository = ServiceRepositoryImpl()
 
+        val expectedComicItem = ComicItem(
+            id = 1,
+            title = "title",
+            coverUrlPath = "",
+            coverUrlExtension = "",
+            publishedDate = "",
+            writer = "",
+            penciler = "",
+            description = ""
+        )
         // When
-        val comicList = serviceRepository.getComicList(1, 0)
+        val comicList = serviceRepository.getComicList()
 
         // Then
-        assertEquals(1, comicList.size)
+        comicList.test {
+            val item = awaitItem()
+            item.map { comicItem ->
+                assertEquals(expectedComicItem, comicItem)}
+        }
     }
 
 }

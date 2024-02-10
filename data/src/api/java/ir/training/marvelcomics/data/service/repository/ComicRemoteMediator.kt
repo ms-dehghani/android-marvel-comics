@@ -30,11 +30,7 @@ class ComicRemoteMediator(
                         endOfPaginationReached = true
                     )
 
-                    LoadType.APPEND -> {
-                        val lastItem = state.lastItemOrNull()
-                            ?: return@withContext MediatorResult.Success(endOfPaginationReached = true)
-                        lastItem.id
-                    }
+                    LoadType.APPEND -> comicDB.comicDao().getLastID()
                 }
 
                 val response = api.getComicList(
