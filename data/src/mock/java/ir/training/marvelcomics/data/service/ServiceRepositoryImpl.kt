@@ -24,15 +24,15 @@ class ServiceRepositoryImpl : ServiceRepository {
         return MutableStateFlow(
             PagingData.from(
                 listOf(
-                    ComicItem(
-                        1,
-                        "title",
-                        "description",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""
+                    element = ComicItem(
+                        id = 1,
+                        title = "title",
+                        coverUrlPath = "description",
+                        coverUrlExtension = "",
+                        publishedDate = "",
+                        writer = "",
+                        penciler = "",
+                        description = ""
                     )
                 )
             )
