@@ -1,4 +1,4 @@
-package ir.training.marvelcomics.viewmodel.list
+package ir.training.marvelcomics.viewmodel.comic.list
 
 import androidx.paging.PagingData
 import io.mockk.coEvery
@@ -24,10 +24,13 @@ class ComicListViewModelTest {
 
     private var comicListUseCase: ComicListUseCase = mockk(relaxed = true)
 
+    private val dispatchers = Dispatchers.Default
+
+
     @Before
     fun setUp() {
         Dispatchers.setMain(Dispatchers.Unconfined)
-        viewModel = ComicListViewModel(comicListUseCase)
+        viewModel = ComicListViewModel(comicListUseCase,dispatchers)
     }
 
     @After

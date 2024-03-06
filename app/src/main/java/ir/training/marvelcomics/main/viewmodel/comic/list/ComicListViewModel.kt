@@ -5,10 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
+import ir.training.marvelcomics.di.IoDispatcher
+import ir.training.marvelcomics.di.MainDispatcher
 import ir.training.marvelcomics.domain.usecase.comic.list.ComicListUseCase
 import ir.training.marvelcomics.main.state.comic.list.ComicListState
 import ir.training.marvelcomics.main.view.pages.comic.list.contract.ComicListEffect
 import ir.training.marvelcomics.main.view.pages.comic.list.contract.ComicListEvent
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -22,8 +25,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ComicListViewModel @Inject constructor(private val comicUseCase: ComicListUseCase) :
-    ViewModel() {
+class ComicListViewModel @Inject constructor(
+    private val comicUseCase: ComicListUseCase,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+) : ViewModel() {
 
     private val _state =
         MutableStateFlow(ComicListState())
@@ -37,7 +42,7 @@ class ComicListViewModel @Inject constructor(private val comicUseCase: ComicList
     }
 
     private fun collectComicItems() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(ioDispatcher) {
             comicUseCase.invoke().cachedIn(viewModelScope).catch { e ->
                 Log.e("ComicListContent", "Error: ${e.message}")
             }.let { comicList ->
