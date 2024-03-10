@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
-class ServiceRepositoryImpl @Inject constructor(val api: ApiService, val comicDB: ComicDB) :
+class ServiceRepositoryImpl @Inject constructor(private val api: ApiService, private val comicDB: ComicDB) :
     ServiceRepository {
     override suspend fun getComicById(id: Int): ComicItem? {
         val dbItem = comicDB.comicDao().getComicById(id)

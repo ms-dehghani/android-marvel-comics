@@ -4,10 +4,14 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import ir.training.marvelcomics.di.DefaultDispatcher
+import ir.training.marvelcomics.di.IoDispatcher
+import ir.training.marvelcomics.di.MainDispatcher
 import ir.training.marvelcomics.domain.usecase.comic.item.ComicItemUseCase
 import ir.training.marvelcomics.main.state.ComicItemState
 import ir.training.marvelcomics.main.view.pages.comic.item.contract.ComicItemEffect
 import ir.training.marvelcomics.main.view.pages.comic.item.contract.ComicItemEvent
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,7 +24,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ComicItemViewModel @Inject constructor(
-    private val comicItemUseCase: ComicItemUseCase, savedStateHandle: SavedStateHandle
+    private val comicItemUseCase: ComicItemUseCase, savedStateHandle: SavedStateHandle,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(ComicItemState())
@@ -39,7 +44,7 @@ class ComicItemViewModel @Inject constructor(
     }
 
     private fun getComicItem() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(ioDispatcher) {
             comicItemUseCase(_state.value.comicId).also { comic ->
                 _state.update { state ->
                     state.copy(comic = comic)
